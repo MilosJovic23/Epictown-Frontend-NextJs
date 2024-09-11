@@ -1,7 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Comics from "@/app/_components/ComicList";
+
 import ComicList from "@/app/_components/ComicList";
+
+import RecoilContextProvider from "@/app/_libs/RecoilContextProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,8 +25,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-      {children}
-      <ComicList/>
+      <RecoilContextProvider>
+          {children}
+      </RecoilContextProvider>
+
       </body>
     </html>
   );
