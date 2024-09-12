@@ -2,10 +2,10 @@
 
 import {useEffect} from "react";
 
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
-import {collection, getDocs} from "firebase/firestore";
-import {db} from "@/app/firebase";
+
+import fetchComics from "@/app/_functions/fetchComics";
 
 
 const ComicList = ()=>{
@@ -13,41 +13,28 @@ const ComicList = ()=>{
     const [comics, setComics] = useRecoilState(ComicsState);
 
     useEffect(() => {
-        const fetchComics= async()=>{
-
-            try{
-                const comicCollection = collection(db, 'comics');
-
-                const comicSnapshot = await getDocs(comicCollection);
-
-                const comicList = comicSnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setComics(comicList);
-            }catch (error) {
-                console.error('Error fetching comics: ', error);
-            }
-        };
-        fetchComics()
+        fetchComics(setComics);
     }, []);
 
-    const comicsValue=useRecoilValue(ComicsState)
-    console.log(comicsValue)
+
+
 
     return<>
 
 
-        {comicsValue.map((comic)=>{
-            return <div key={comic.id}>
-                <a href={`/products/${comic.id}`} target="_blank">
-                    <h3>{comic.title}</h3>
-                    <p>author:{comic.author}</p>
-                    <p>artist:{comic.artist}</p>
-                    <img src={comic.imgURL}/>
-                </a>
-                </div>
+        {comics.map((comic)=>{
+            return <div class="singleComicWrapper" key={comic.id}>
+                <a href={`/Products/${comic.id}`} target="_blank">
+                    <div className="singleComicImg">
+                        <img src={comic.imgURL}/>
+                    </div>
+                    <div className="comicTitle">
+                        <h3>{comic.title}</h3>
+                        <p>author:{comic.author}</p>
+                    </div>
 
+                </a>
+            </div>
 
 
         })}
