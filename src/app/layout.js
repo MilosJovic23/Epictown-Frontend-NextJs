@@ -1,9 +1,10 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
-import ComicList from "@/app/_components/ComicList";
+
 
 import RecoilContextProvider from "@/app/_libs/RecoilContextProvider";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
