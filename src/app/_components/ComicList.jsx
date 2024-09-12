@@ -2,7 +2,7 @@
 
 import {useEffect} from "react";
 
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilState} from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
 
 import fetchComics from "@/app/_functions/fetchComics";
@@ -23,7 +23,7 @@ const ComicList = ()=>{
 
 
         {comics.map((comic)=>{
-            return <div class="singleComicWrapper" key={comic.id}>
+            return <div className="singleComicWrapper" key={comic.id}>
                 <a href={`/Products/${comic.id}`} target="_blank">
                     <div className="singleComicImg">
                         <img src={comic.imgURL}/>
