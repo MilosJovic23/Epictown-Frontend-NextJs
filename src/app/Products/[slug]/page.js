@@ -1,23 +1,54 @@
 
 "use client"
 
-import {useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
+import fetchComics from "@/app/_functions/fetchComics";
+import {useEffect, useState} from "react";
+
 
 
 export default function Products ({params}){
 
+    const [isMounted, setIsMounted] = useState(false);
+    const [comics, setComics] = useRecoilState(ComicsState);
 
-    const slugId= params.slug;
-    const comicsValue=useRecoilValue(ComicsState)
-    console.log(slugId)
-    // if( !data ){
-    //     return <h1>Ova stranice ne postoji</h1>
-    // }
+    useEffect(() => {
+        fetchComics(setComics);
+        setIsMounted(true);
+    }, []);
 
-    return<>
+    const slugId=params.slug;
+    if(!isMounted){
+        return <h1>loading..</h1>
+    }
+    else if(slugId > comics.length)  {
+        return <h1>this page doesnt exist</h1>
+    }
 
-        <p>Hello world</p>
+    return <>
+
+        {comics.map((comic)=>{
+
+            return (comic.id===parseInt(params.slug))?
+                (
+                    <div className="singleComicWrapper" key={comic.id}>
+                        <a href={`/Products/${comic.id}`} target="_blank">
+                            <div className="singleComicImg">
+                                <img src={comic.imgURL}/>
+                            </div>
+                            <div className="comicTitle">
+                                <h3>{comic.title}</h3>
+                                <p>author:{comic.author}</p>
+                            </div>
+
+                        </a>
+                    </div>
+                )
+                :
+                ("")
+
+        })}
 
     </>
 
