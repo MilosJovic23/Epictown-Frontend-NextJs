@@ -1,9 +1,10 @@
 
 import ComicList from "@/app/_components/ComicList";
 
+
 export default function Home() {
   return (
-    <div>
+    <div className="comicListWrapper">
       <ComicList/>
     </div>
   );
