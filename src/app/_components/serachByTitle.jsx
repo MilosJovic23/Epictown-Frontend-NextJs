@@ -11,6 +11,9 @@ const Search = ()=>{
 
 
     const [searchTerm,setSearchTerm]=useState([]);
+
+
+
     const comics= useRecoilValue(ComicsState);
 
     let searchByTitleId= [];
@@ -26,18 +29,17 @@ const Search = ()=>{
            if( comic.title.toLowerCase().includes(searchTerm.toLowerCase()) || comic.author.toLowerCase().includes(searchTerm.toLowerCase()) ){
 
                searchByTitleId.push(comic);
-               console.log(searchByTitleId)
 
            }
 
         }
         )
     }
-    useEffect(() => {
-        searchByTitleId=[];
-    }, [search]);
+    // useEffect(() => {
+    //     searchByTitleId=[];
+    // }, [search]);
 
-    console.log(searchByTitleId);
+
 
     return<>
 

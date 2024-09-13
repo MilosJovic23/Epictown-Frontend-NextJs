@@ -11,16 +11,15 @@ import {useEffect, useState} from "react";
 export default function Products ({params}){
 
     const [isMounted, setIsMounted] = useState(false);
-    const [comics, setComics] = useRecoilState(ComicsState);
+    const comics = useRecoilValue(ComicsState);
 
     useEffect(() => {
-        fetchComics(setComics);
         setIsMounted(true);
     }, []);
 
     const slugId=params.slug;
     if(!isMounted){
-        return <h1>loading..</h1>
+        return <h5>loading..</h5>
     }
     else if(slugId > comics.length)  {
         return <h1>this page doesnt exist</h1>
@@ -33,7 +32,7 @@ export default function Products ({params}){
             return (comic.id===parseInt(params.slug))?
                 (
                     <div className="singleComicWrapper" key={comic.id}>
-                        <a href={`/Products/${comic.id}`} target="_blank">
+
                             <div className="singleComicImg">
                                 <img src={comic.imgURL}/>
                             </div>
@@ -42,7 +41,7 @@ export default function Products ({params}){
                                 <p>author:{comic.author}</p>
                             </div>
 
-                        </a>
+
                     </div>
                 )
                 :

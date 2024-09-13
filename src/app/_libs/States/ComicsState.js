@@ -2,11 +2,12 @@
 
 
 import {atom} from "recoil";
+import {recoilPersist} from "recoil-persist";
 
-
-export const ComicsState = atom(
-    {
+const {persistAtom}=recoilPersist();
+export const ComicsState = atom({
         key:"comicsState",
-        default:[]
+        default:[],
+        effects_UNSTABLE:[persistAtom]
     }
-)
+);

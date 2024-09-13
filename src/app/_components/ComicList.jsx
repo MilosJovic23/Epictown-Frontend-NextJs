@@ -2,7 +2,7 @@
 
 import {useEffect} from "react";
 
-import {useRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
 
 import fetchComics from "@/app/_functions/fetchComics";
@@ -17,10 +17,10 @@ const ComicList = ()=>{
     }, []);
 
 
+    console.log(comics)
 
 
     return<>
-
 
         {comics.map((comic)=>{
             return <div className="singleComicWrapper" key={comic.id}>
