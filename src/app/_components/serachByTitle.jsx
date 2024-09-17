@@ -15,56 +15,52 @@ const Search = ()=>{
     const comics= useRecoilValue(ComicsState);
 
 
-
+    const resultsByTitle=[];
 
     const search = ()=>{
-
 
         comics.forEach( comic =>{
 
            if( comic.title.toLowerCase().includes(searchTerm.toLowerCase()) || comic.author.toLowerCase().includes(searchTerm.toLowerCase()) ){
 
-               setSearchResults([...items, `${items.length + 1}`]);
+               resultsByTitle.push(comic);
+
                console.log(searchResults);
            }
         }
         )
+        setSearchResults(resultsByTitle);
     }
-    // useEffect(() => {
-    //     searchByTitleId=[];
-    // }, [search]);
-
 
 
     return<>
 
         <div>
             <form className="form-field">
-                <input  placeholder="Search comics" o onChange={e => setSearchTerm(e.currentTarget.value)}/>
+                <input  placeholder="Search comics" onInput={search} onChange={e => setSearchTerm(e.currentTarget.value)}/>
                 <span className="icon"><AiOutlineSearch /></span>
-                <button type="button" onClick={search} >search</button>
             </form>
-            {/*<div>*/}
+            <div>
 
-            {/*    {*/}
-            {/*        searchResults.map((comic,index)=> {*/}
+                {
+                    searchResults.map((comic,index)=> {
 
-            {/*            return <div  key={index}>*/}
-            {/*                <a href={`/Products/${comic.id}`} target="_blank">*/}
-            {/*                    <div >*/}
-            {/*                        <img src={comic.imgURL}/>*/}
-            {/*                    </div>*/}
-            {/*                    <div >*/}
-            {/*                        <h3>{comic.title}</h3>*/}
-            {/*                    </div>*/}
-            {/*                </a>*/}
-            {/*            </div>*/}
+                        return <div  key={index}>
+                            <a href={`/Products/${comic.id}`} target="_blank">
+                                <div >
+                                    <img src={comic.imgURL}/>
+                                </div>
+                                <div >
+                                    <h3>{comic.title}</h3>
+                                </div>
+                            </a>
+                        </div>
 
-            {/*        })*/}
+                    })
 
 
-            {/*    }*/}
-            {/*</div>*/}
+                }
+            </div>
 
         </div>
 
