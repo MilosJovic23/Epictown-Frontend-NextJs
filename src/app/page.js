@@ -7,7 +7,7 @@ import Search from "@/app/_components/serachByTitle";
 export default function Home() {
   return (
     <div className="comicListWrapper">
-      <ComicList/>
+      {/*<ComicList/>*/}
        <Search/>
     </div>
   );
