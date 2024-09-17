@@ -9,10 +9,7 @@ import {useEffect, useState} from "react";
 
 const Search = ()=>{
 
-
     const [searchTerm,setSearchTerm]=useState([]);
-
-
 
     const comics= useRecoilValue(ComicsState);
 
@@ -23,21 +20,16 @@ const Search = ()=>{
 
         comics.forEach( comic =>{
 
-
-
-
            if( comic.title.toLowerCase().includes(searchTerm.toLowerCase()) || comic.author.toLowerCase().includes(searchTerm.toLowerCase()) ){
 
                searchByTitleId.push(comic);
-
            }
-
         }
         )
     }
-    // useEffect(() => {
-    //     searchByTitleId=[];
-    // }, [search]);
+    useEffect(() => {
+        searchByTitleId=[];
+    }, [search]);
 
 
 
@@ -50,7 +42,7 @@ const Search = ()=>{
             </form>
             {
 
-                searchByTitleId.map((comic,index)=> {
+                !searchByTitleId?( searchByTitleId.map((comic,index)=> {
 
                         return <div  key={index}>
                             <a href={`/Products/${comic.id}`} target="_blank">
@@ -66,6 +58,11 @@ const Search = ()=>{
 
                     }
                 )
+                ):(
+                ''
+                )
+
+
 
             }
         </div>
