@@ -9,15 +9,17 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const Search = ()=>{
 
-    const [searchTerm,setSearchTerm]=useState('');
+    const [searchTerm,setSearchTerm]=useState();
     const [searchResults,setSearchResults]=useState([]);
 
     const comics= useRecoilValue(ComicsState);
 
 
-    const resultsByTitle=[];
+    let resultsByTitle=[];
 
     const search = ()=>{
+
+
 
         comics.forEach( comic =>{
 
@@ -30,36 +32,52 @@ const Search = ()=>{
         }
         )
         setSearchResults(resultsByTitle);
+
+
     }
 
+    useEffect(() => {
+        if (searchTerm === "") {
+            setSearchResults([]);
+        }
+    }, [searchTerm]);
+
+    console.log(searchTerm);
 
     return<>
 
         <div>
             <form className="form-field">
-                <input  placeholder="Search comics" onInput={search} onChange={e => setSearchTerm(e.currentTarget.value)}/>
-                <span className="icon"><AiOutlineSearch /></span>
+                <div className="searchContainer">
+                    <span className="icon"><AiOutlineSearch/></span>
+                    <input placeholder="Search comics" onInput={search}
+                           onChange={e => setSearchTerm(e.currentTarget.value)} value={searchTerm}/>
+                </div>
+
             </form>
             <div>
 
-                {
-                    searchResults.map((comic,index)=> {
+            {
 
-                        return <div  key={index}>
-                            <a href={`/Products/${comic.id}`} target="_blank">
-                                <div >
+                    searchResults.map((comic, index) => {
+
+                        return <div className="searchResultsContainer" key={index}>
+                            <div className="resultCard">
+                                <a href={`/Products/${comic.id}`} target="_blank">
+
                                     <img src={comic.imgURL}/>
-                                </div>
-                                <div >
-                                    <h3>{comic.title}</h3>
-                                </div>
-                            </a>
+
+
+                                </a>
+                                <h3>{comic.title}</h3>
+                            </div>
+
                         </div>
 
                     })
 
 
-                }
+            }
             </div>
 
         </div>
