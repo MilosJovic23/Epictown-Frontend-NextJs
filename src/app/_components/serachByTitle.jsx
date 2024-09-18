@@ -55,21 +55,24 @@ const Search = ()=>{
                 </div>
 
             </form>
-            <div>
+            <div className="searchResultsContainer">
 
             {
 
                     searchResults.map((comic, index) => {
 
-                        return <div className="searchResultsContainer" key={index}>
+                        return <div  key={index}>
                             <div className="resultCard">
                                 <a href={`/Products/${comic.id}`} target="_blank">
 
                                     <img src={comic.imgURL}/>
+                                    <div className="resultCard-title">
+                                        <p>{comic.title}</p>
+                                    </div>
 
 
                                 </a>
-                                <h3>{comic.title}</h3>
+
                             </div>
 
                         </div>
