@@ -29,7 +29,7 @@ const ComicList = ()=>{
                     <div className="singleComicImg">
                         <img src={comic.imgURL}/>
                     </div>
-                    <div className="comicTitle">
+                    <div className="comicTitle text-dark">
                         <h5>{comic.title}</h5>
                         <p>author:{comic.author}</p>
                     </div>
