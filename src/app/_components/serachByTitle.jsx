@@ -6,10 +6,11 @@ import {useRecoilValue} from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
 import {useEffect, useState} from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import "../search.css"
 
 const Search = ()=>{
 
-    const [searchTerm,setSearchTerm]=useState();
+    const [searchTerm,setSearchTerm]=useState("");
     const [searchResults,setSearchResults]=useState([]);
 
     const comics= useRecoilValue(ComicsState);
@@ -42,7 +43,7 @@ const Search = ()=>{
         }
     }, [searchTerm]);
 
-    console.log(searchTerm);
+    console.log(searchTerm.length);
 
     return<>
 
@@ -50,17 +51,23 @@ const Search = ()=>{
             <form className="form-field">
                 <div className="searchContainer">
                     <span className="icon"><AiOutlineSearch/></span>
-                    <input placeholder="Search comics" onInput={search}
+                    <input placeholder="search comics" onInput={search}
                            onChange={e => setSearchTerm(e.currentTarget.value)} value={searchTerm}/>
                 </div>
 
             </form>
         </div>
-        <div className="searchResultsContainer">
+
 
             {
-                    searchResults.map((comic, index) => {
-                        return <div  key={index}>
+                searchTerm.length>0 &&
+
+
+
+                (<div className="searchResultsStyle">
+
+                    { searchResults.map((comic, index) => {
+                        return <div className="result-item"  key={index}>
                             <div className="resultCard">
                                 <a href={`/Products/${comic.id}`} target="_blank">
 
@@ -75,12 +82,14 @@ const Search = ()=>{
                             </div>
 
                         </div>
-                    })
+                    })}
 
+                </div>
+                )
 
             }
 
-        </div>
+
 
 
     </>
