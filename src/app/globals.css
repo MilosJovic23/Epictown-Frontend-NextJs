@@ -53,7 +53,8 @@ a {
 .singleComicImg img{
   width:100%;
   height: 100%;
-  object-fit: contain;
+    max-height: 230px;
+  object-fit: cover;
 
 }
 .singleComicImg{
@@ -64,67 +65,48 @@ a {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+    height: 8rem;
   box-sizing: border-box;
   padding: 0.5em;
+    overflow: hidden;
 }
 .comicTitle p{
-  margin-top: 0.5em;
-  font-size: 0.6rem;
+    margin-top: 0.5em;
+    color: #8c8c8c;
+    font-size: 0.7rem;
 }
-
-.form-field {
-  position: relative;
-  display: inline-block;
-
-}
-
-
-.searchContainer{
-    display: flex;
-    border-bottom: 1px solid black;
-    padding:.5em 0;
-    gap:5px;
-}
-.form-field  input{
-  outline:none;
-  border:none;
-}
-.form-field input::placeholder{
-  text-align: left;
-  color: #afafaf;
+.comicTitle h5{
+    font-size: 1.1rem;
 }
 
 
-.searchResultsContainer{
-    background-color: #ffffff;
-    padding:10px;
-    display: flex;
-    position: relative;
-    gap:20px;
-}
-.resultCard:hover{
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-.resultCard-title{
-      width:100%;
-}
-.resultCard-title p{
-    font-size: 0.8rem;
-}
-.resultCard img{
-    width:120px;
-    height: 100%;
-    object-fit: contain;
 
-}
+
+
 .container{
     width:80%;
     max-width: 1500px;
+    margin:0 auto;
 }
 .navBar{
-    background-color: #383838;
+    background-color: #ffffff;
     padding: 2em 0;
 }
+.navigation ul{
+    margin:0;
+    padding:0;
+}
+.navBar a:hover{
+    color: #707070;
+}
+.logo-img{
+    align-self: center;
+}
+.logo-img:hover{
+    opacity: 80%;
+}
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
