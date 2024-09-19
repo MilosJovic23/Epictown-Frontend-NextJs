@@ -22,7 +22,8 @@ const ComicList = ()=>{
 
     return<>
 
-        {comics.map((comic)=>{
+        {
+            comics.map((comic)=>{
             return <div className="singleComicWrapper" key={comic.id}>
                 <a href={`/Products/${comic.id}`} target="_blank">
                     <div className="singleComicImg">
