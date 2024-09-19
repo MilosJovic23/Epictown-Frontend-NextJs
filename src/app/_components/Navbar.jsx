@@ -3,6 +3,7 @@ import Image from 'next/image'
 import logo from '../epictown.svg'
 
 import 'bootstrap/dist/css/bootstrap.css'
+import Home from "@/app/page";
 const Navbar =()=>{
     return<>
 

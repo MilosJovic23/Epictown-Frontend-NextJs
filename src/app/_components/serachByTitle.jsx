@@ -72,9 +72,6 @@ const Search = ()=>{
                                 <a href={`/Products/${comic.id}`} target="_blank">
 
                                     <img src={comic.imgURL}/>
-                                    <div className="resultCard-title">
-                                        <p>{comic.title}</p>
-                                    </div>
 
 
                                 </a>
