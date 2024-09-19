@@ -117,6 +117,14 @@ a {
     object-fit: contain;
 
 }
+.container{
+    width:80%;
+    max-width: 1500px;
+}
+.navBar{
+    background-color: #383838;
+    padding: 2em 0;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
