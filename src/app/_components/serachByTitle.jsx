@@ -55,12 +55,11 @@ const Search = ()=>{
                 </div>
 
             </form>
-            <div className="searchResultsContainer">
+        </div>
+        <div className="searchResultsContainer">
 
             {
-
                     searchResults.map((comic, index) => {
-
                         return <div  key={index}>
                             <div className="resultCard">
                                 <a href={`/Products/${comic.id}`} target="_blank">
@@ -76,14 +75,13 @@ const Search = ()=>{
                             </div>
 
                         </div>
-
                     })
 
 
             }
-            </div>
 
         </div>
+
 
     </>
 }
