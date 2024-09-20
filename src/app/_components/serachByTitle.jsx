@@ -16,6 +16,8 @@ const Search = ()=>{
     const comics= useRecoilValue(ComicsState);
 
 
+
+
     let resultsByTitle=[];
 
     const search = ()=>{
@@ -71,10 +73,14 @@ const Search = ()=>{
                             <div className="resultCard">
                                 <a href={`/Products/${comic.id}`} target="_blank">
 
-                                    <img src={comic.imgURL}/>
+                                    <div className="imgHover">
+                                        <img src={comic.imgURL}/>
+                                        <div className="text">{comic.title}</div>
+                                    </div>
 
 
                                 </a>
+
 
                             </div>
 

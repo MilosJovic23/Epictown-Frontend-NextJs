@@ -14,13 +14,39 @@
 .resultCard img{
 
     overflow: hidden;
-    height: 100%;
-    max-height: 150px;
+    width: 100%;
+     max-height: 160px;
     object-fit: cover;
 
 }
 .resultCard{
+    width:100%;
     box-sizing: border-box;
+    position: relative;
+}
+
+
+.imgHover:hover .text{
+    display: block;
+    transition: all 2s;
+}
+.text{
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0.4em;
+    color: #f1f1f1;
+    background-color: rgba(129, 129, 129, 0.48);
+    float: left;
+    display: none;
+    left:0;
+    top:0;
+    line-height: 1.156;
+    font-size: 1rem;
+    white-space:normal;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    width: 100%;
+
 }
 
 
@@ -32,17 +58,18 @@
 
 }
 .searchResultsStyle{
+    box-shadow: rgba(155, 155, 155, 0.51) 0px 8px 24px;
     position: absolute;
     top: 8%;
     left: 0;
     right: 0;
-    background-color: #e5e5e5;
+    background-color: #F9F8F6;
     display: flex;
-    gap:2em;
+    flex-wrap: wrap;
+    gap:0.8em;
     z-index: 100;
     margin:0 auto;
     width:80%;
-
     max-height: 220px;
     max-width: 1800px;
     overflow-y: auto;
