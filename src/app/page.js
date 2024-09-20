@@ -1,20 +1,18 @@
 
 import ComicList from "@/app/_components/ComicList";
-import Search from "@/app/_components/serachByTitle";
 
-import "./MainPageStyle.css";
+
+import "./Home.css";
 import Header from "@/app/_components/Navbar";
 import "bootstrap/dist/css/bootstrap.css"
+import Hero from "@/app/_components/Hero";
 export default function Home() {
   return (
       <>
 
-              <Header/>
-
-
-
-
-                  <ComicList/>
+            <Header/>
+            <Hero/>
+            <ComicList/>
 
 
 
