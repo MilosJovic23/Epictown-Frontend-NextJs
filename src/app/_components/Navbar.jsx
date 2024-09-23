@@ -7,7 +7,6 @@ import Home from "@/app/page";
 const Header =()=>{
     return<>
 
-
     <div className="navBar">
         <div className="MainContainer d-flex  justify-content-between">
             <div className="d-flex w-50 gap-5">
