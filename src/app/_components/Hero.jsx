@@ -7,7 +7,6 @@ const Hero = () =>{
 
     return<>
 
-
         <section className="heroSection">
             <div className="MainContainer d-flex justify-content-between">
                 <div className="hero-col">
