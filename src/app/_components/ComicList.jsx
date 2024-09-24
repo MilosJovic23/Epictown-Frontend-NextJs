@@ -16,7 +16,7 @@ const ComicList = ()=>{
         fetchComics(setComics);
     }, []);
 
-    const sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,7)
+    const sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,7);
     console.log(sortedProducts)
 
 
