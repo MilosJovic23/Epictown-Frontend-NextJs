@@ -48,7 +48,17 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+.comici-list-text a:first-child{
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01rem;
+}
+.comici-list-text a:last-child{
+    font-size: 1rem;
+    font-weight: 400;
+    align-self: center;
+    letter-spacing: -0.01rem;
+}
 .singleComicWrapper{
   width:20vh;
   height:100%;
