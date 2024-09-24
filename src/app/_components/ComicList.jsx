@@ -23,16 +23,16 @@ const ComicList = ()=>{
     return<>
         <div className="MainContainer py-5">
 
-        <div className="d-flex justify-content-between py-3">
+        <div className="comici-list-text d-flex justify-content-between py-3">
             <a>Best sellers</a>
-            <a>view all</a>
+            <a href='/products'>view all</a>
         </div>
         <div className="d-flex flex-wrap gap-1 align-self-center">
             {
                 comics.map((comic)=>{
                     return <div className="singleComicWrapper" key={comic.id}>
                         <a href={`/Products/${comic.id}`} target="_blank">
-                            <div className="singleComicImg">
+                            <div className="singleComicImg ">
                                 <img src={comic.imgURL}/>
                             </div>
                             <div className="comicTitle text-dark">
