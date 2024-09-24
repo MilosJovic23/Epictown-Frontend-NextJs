@@ -5,6 +5,15 @@ import logo from '../_images/epictown.svg'
 import 'bootstrap/dist/css/bootstrap.css'
 import Home from "@/app/page";
 const Header =()=>{
+
+
+
+
+
+
+
+
+
     return<>
 
     <div className="navBar">
