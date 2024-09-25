@@ -6,6 +6,7 @@ import "./Home.css";
 import Header from "@/app/_components/Navbar";
 import "bootstrap/dist/css/bootstrap.css"
 import Hero from "@/app/_components/Hero";
+import Footer from "@/app/_components/Footer";
 export default function Home() {
   return (
       <>
@@ -13,10 +14,7 @@ export default function Home() {
             <Header/>
             <Hero/>
             <ComicList/>
-
-
-
-
+            <Footer/>
       </>
 
   );
