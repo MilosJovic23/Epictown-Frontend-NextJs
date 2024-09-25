@@ -1,10 +1,12 @@
 
 "use client"
 
-import {useRecoilState, useRecoilValue} from "recoil";
+import { useRecoilValue } from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
-import fetchComics from "@/app/_functions/fetchComics";
+
 import {useEffect, useState} from "react";
+import Navbar from "@/app/_components/Navbar";
+import Footer from "@/app/_components/Footer";
 
 
 
@@ -26,7 +28,7 @@ export default function Products ({params}){
     }
 
     return <>
-
+        <Navbar/>
         {comics.map((comic)=>{
 
             return (comic.id===parseInt(params.slug))?
@@ -48,7 +50,7 @@ export default function Products ({params}){
                 ("")
 
         })}
-
+    <Footer/>
     </>
 
 
