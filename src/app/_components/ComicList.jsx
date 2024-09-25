@@ -17,7 +17,7 @@ const ComicList = ()=>{
     }, []);
 
     const sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,7);
-    console.log(sortedProducts)
+
 
 
     return<>
@@ -27,7 +27,7 @@ const ComicList = ()=>{
             <a>Best rated</a>
             <a href='/products'>view all</a>
         </div>
-        <div className="d-flex flex-wrap gap-0 align-self-center justify-content-between">
+        <div className="d-flex flex-wrap gap-1 align-self-center justify-content-between">
             {
                 sortedProducts.map((comic,index)=>{
 
