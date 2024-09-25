@@ -25,7 +25,7 @@ const Hero = () =>{
         },
         tablet: {
             breakpoint: { max: 1024, min: 464 },
-            items: 2
+            items: 1
         },
         mobile: {
             breakpoint: { max: 464, min: 0 },
@@ -38,7 +38,7 @@ const Hero = () =>{
         <section className="heroSection">
             <div className="MainContainer d-flex justify-content-between">
                 <div className="hero-col">
-                    <h1>Graphic novels comic books and more..</h1>
+                    <h1>Graphic novels, comic books and much more</h1>
                     <a id="exploreBtn" href="#">explore</a>
                 </div>
                 <div className="hero-col">
