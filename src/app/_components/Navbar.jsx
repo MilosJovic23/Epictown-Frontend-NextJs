@@ -6,14 +6,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Home from "@/app/page";
 const Header =()=>{
 
-
-
-
-
-
-
-
-
     return<>
 
     <div className="navBar">
