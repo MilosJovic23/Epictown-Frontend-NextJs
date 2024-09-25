@@ -1,0 +1,37 @@
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+
+}
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+
+
+.footerContainer{
+    background-color: #F2F1E8;
+}
+.footerContainer a{
+    font-size: 1rem;
+}
+.footer-copyrights p{
+    text-align: center;
+    padding: 2em 0 1em 0;
+    margin:0;
+    font-size: 0.8rem;
+    color: #8d8d8d;
+}
+.hrline{
+    margin: 1rem 0;
+    color: black;
+    background-color: currentColor;
+    border: 1px;
+    opacity: 0.25;
+}
