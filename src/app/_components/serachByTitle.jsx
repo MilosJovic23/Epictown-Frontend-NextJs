@@ -16,13 +16,9 @@ const Search = ()=>{
     const comics= useRecoilValue(ComicsState);
 
 
-
-
     let resultsByTitle=[];
 
     const search = ()=>{
-
-
 
         comics.forEach( comic =>{
 
@@ -30,7 +26,6 @@ const Search = ()=>{
 
                resultsByTitle.push(comic);
 
-               console.log(searchResults);
            }
         }
         )
@@ -45,7 +40,7 @@ const Search = ()=>{
         }
     }, [searchTerm]);
 
-    console.log(searchTerm.length);
+
 
     return<>
 
