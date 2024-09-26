@@ -1,10 +1,26 @@
+
+"use client"
+
+
 import Search from "@/app/_components/serachByTitle";
 import Image from 'next/image'
 import logo from '../_images/epictown.svg'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import Home from "@/app/page";
+import {useRecoilState} from "recoil";
+import {UserState} from "@/app/_libs/States/UserState";
 const Header =()=>{
+
+
+    const [userState,setUserState]=useRecoilState(UserState);
+
+
+    const logout = (e)=>{
+        e.preventDefault();
+        setUserState({"isLoggedIn":false})
+
+    }
 
     return<>
 
@@ -21,9 +37,15 @@ const Header =()=>{
                 </div>
             </div>
             <div className="d-flex gap-3">
+                {(userState.type=== 'admin') &&(<a href={`/Products`}>adminDashboard</a>)}
                 <Search/>
                 <div className="vr"></div>
-                <a className="align-self-center" href={`/users/login`}>login</a>
+                {userState.isLoggedIn ? (
+                    <a className="align-self-center" href="#" onClick={e=>logout(e)}>logout</a>
+                ): (
+                    <a className="align-self-center" href={`/users/login`}>login</a>
+                )}
+
             </div>
         </div>
     </div>
