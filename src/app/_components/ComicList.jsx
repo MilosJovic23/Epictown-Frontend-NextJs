@@ -1,23 +1,25 @@
+
 "use client"
 
-import { useEffect } from "react";
 
 import { useRecoilState } from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
 
 import fetchComics from "@/app/_functions/fetchComics";
+import {useEffect} from "react";
 
 
 const ComicList = ()=>{
 
     const [comics, setComics] = useRecoilState(ComicsState);
 
+
     useEffect(() => {
         fetchComics(setComics);
     }, []);
 
-    const sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,7);
 
+    let sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,6);
 
 
     return<>
@@ -27,7 +29,7 @@ const ComicList = ()=>{
             <a>Best rated</a>
             <a href='/products'>view all</a>
         </div>
-        <div className="d-flex flex-wrap gap-1 align-self-center justify-content-between">
+        <div className="d-flex flex-wrap gap-1  justify-content-between">
             {
                 sortedProducts.map((comic,index)=>{
 
