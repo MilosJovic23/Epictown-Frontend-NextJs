@@ -25,11 +25,11 @@ const ComicList = ()=>{
     return<>
         <div className="MainContainer py-4">
 
-        <div className="comici-list-text d-flex justify-content-between py-3">
-            <a>Best rated</a>
+        <div className="comic-list-text d-flex justify-content-between py-3">
+            <h5>Best rated</h5>
             <a href='/products'>view all</a>
         </div>
-        <div className="d-flex flex-wrap gap-1  justify-content-between">
+        <div className="d-flex flex-wrap gap-1 gap-sm-4  justify-content-sm-center justify-content-md-between">
             {
                 sortedProducts.map((comic,index)=>{
 
