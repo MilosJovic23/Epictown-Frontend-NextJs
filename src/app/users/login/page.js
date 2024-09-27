@@ -37,7 +37,7 @@ export default function Login ({params}){
 
 
         <Header/>
-        <div className="MainContainer loginContainer" >
+        <div className="MainContainer loginContainer d-flex align-items-center" >
             <form onSubmit={handleSubmit(onSubmit)} className="form">
 
 
