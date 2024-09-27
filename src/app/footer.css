@@ -21,6 +21,9 @@ body {
 .footerContainer a{
     font-size: 1rem;
 }
+.footerContainer a:hover{
+    color: #ff4242;
+}
 .footer-copyrights p{
     text-align: center;
     padding: 2em 0 1em 0;
