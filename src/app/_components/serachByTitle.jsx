@@ -2,18 +2,19 @@
 
 
 
-import {useRecoilValue} from "recoil";
-import {ComicsState} from "@/app/_libs/States/ComicsState";
-import {useEffect, useState} from "react";
+import { useRecoilValue } from "recoil";
+import { ComicsState } from "@/app/_libs/States/ComicsState";
+import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import "../search.css"
+import Favorites from "@/app/_components/Favorites";
 
 const Search = ()=>{
 
     const [searchTerm,setSearchTerm]=useState("");
     const [searchResults,setSearchResults]=useState([]);
 
-    const comics= useRecoilValue(ComicsState);
+    const comics= useRecoilValue( ComicsState );
 
 
     let resultsByTitle=[];
@@ -23,15 +24,12 @@ const Search = ()=>{
         comics.forEach( comic =>{
 
            if( comic.title.toLowerCase().includes(searchTerm.toLowerCase()) || comic.author.toLowerCase().includes(searchTerm.toLowerCase()) ){
-
-               resultsByTitle.push(comic);
-
+               resultsByTitle.push( comic );
            }
         }
         )
+
         setSearchResults(resultsByTitle);
-
-
     }
 
     useEffect(() => {

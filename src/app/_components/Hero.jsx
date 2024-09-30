@@ -7,6 +7,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {useRecoilState} from "recoil";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
+import Favorites from "@/app/_components/Favorites";
 const Hero = () =>{
 
     const [comics, setComics] = useRecoilState(ComicsState);
