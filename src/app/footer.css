@@ -31,10 +31,15 @@ body {
     font-size: 0.8rem;
     color: #8d8d8d;
 }
-.hrline{
-    margin: 1rem 0;
-    color: black;
-    background-color: currentColor;
-    border: 1px;
-    opacity: 0.25;
+
+.col-3 h4{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+.MainContainer a{
+    color: #736f69;
+}
+.MainContainer p{
+    margin:0;
 }
