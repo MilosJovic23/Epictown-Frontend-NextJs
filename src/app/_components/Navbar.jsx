@@ -43,7 +43,7 @@ const Header =()=>{
                 {userState.isLoggedIn ? (
                     <a className="align-self-center" href="#" onClick={e=>logout(e)}>logout</a>
                 ): (
-                    <a className="align-self-center" href={`/users/login`}>login</a>
+                    <a className="align-self-center" href={`/Users/Login`}>login</a>
                 )}
 
             </div>
