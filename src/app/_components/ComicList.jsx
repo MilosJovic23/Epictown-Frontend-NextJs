@@ -29,7 +29,7 @@ const ComicList = ()=>{
             <h5>Best rated</h5>
             <a href='/products'>view all</a>
         </div>
-        <div className="d-flex flex-wrap gap-1 gap-sm-4  justify-content-sm-center justify-content-md-between">
+        <div className="d-flex flex-wrap  justify-content-between">
             {
                 sortedProducts.map((comic,index)=>{
 
