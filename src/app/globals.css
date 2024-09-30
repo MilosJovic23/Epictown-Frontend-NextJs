@@ -82,9 +82,9 @@ a {
 }
 
 .singleComicWrapper{
-    max-width:240px;
+    max-width:190px;
     overflow: hidden;
-    max-height: 500px;
+    max-height: 420px;
 }
 
 
