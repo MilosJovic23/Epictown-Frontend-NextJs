@@ -127,9 +127,11 @@ a {
 
 
 .secondaryNavItems a:first-child{
-    color:gold;
+    color:red;
 }
-
+.secondaryNavItems a:first-child:hover{
+    opacity: 70%;
+}
 
 /*
     css for Favorites component

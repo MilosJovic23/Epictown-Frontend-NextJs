@@ -25,7 +25,7 @@ const Header =()=>{
     return<>
 
     <div className="navBar">
-        <div className="MainContainer d-flex  justify-content-between">
+        <div className="MainContainer d-flex  justify-content-lg-between flex-lg-row flex-md-column align-items-md-center gap-md-3">
             <div className="d-flex w-50 gap-5">
                 <a href="/"><Image className="logo-img" src={logo} alt="Picture of the author" width="20px" height="20px"/></a>
                 <div className="navigation d-flex align-items-center">
@@ -37,7 +37,7 @@ const Header =()=>{
                 </div>
             </div>
             <div className="d-flex gap-3 secondaryNavItems">
-                {userState.isLoggedIn && ( <a className="favorites align-self-center" href={`/Favorites`}><HiStar style={{ fontSize: '1.2rem', color: 'gold' }}/>favorites</a> )}
+                {userState.isLoggedIn && ( <a className="favorites align-self-center d-flex" href={`/Wishlist`}><HiStar style={{ fontSize: '1.2rem', color: 'red' }}/>wishlist</a> )}
                 {(userState.type=== 'admin') &&(<a className="dashboard align-self-center" href={`/Products`}>dashboard</a>)}
                 <Search/>
                 <div className="vr"></div>
