@@ -2,19 +2,15 @@
 
 
 import { HiOutlineStar,HiStar } from "react-icons/hi2";
-import { useSetRecoilState} from "recoil";
+import {useRecoilState, useSetRecoilState} from "recoil";
 import {FavoritesComics} from "@/app/_libs/States/Favorites";
 import {useEffect, useState} from "react";
 
 const Favorites = ({comicId}) =>{
 
-    const [ IsClicked , setIsClicked ] = useState(false)
-    const setFavorites = useSetRecoilState(FavoritesComics);
-    const favorites = useSetRecoilState(FavoritesComics);
-
+    const [favorites, setFavorites] = useRecoilState(FavoritesComics);
 
     const addToFavorites = () =>{
-
 
         setFavorites((prevFavorites) => {
 
@@ -25,19 +21,15 @@ const Favorites = ({comicId}) =>{
                 : [...currentFavorites, comicId]
         });
 
-        setIsClicked(!IsClicked);
-
-
-
     }
 
-
+        const isFavorite = favorites.includes(comicId);
 
 
     return <>
         <div onClick= { addToFavorites } className="like-button" style={{ cursor: 'pointer' }}>
         {
-            !IsClicked ?  (
+            !isFavorite ?  (
                 <HiOutlineStar style={{ fontSize: '1.7rem', color: 'black' }} />
             ):(
                 <HiStar style={{ fontSize: '1.7rem', color: 'gold' }} />

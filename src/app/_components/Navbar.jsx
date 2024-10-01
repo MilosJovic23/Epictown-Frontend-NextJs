@@ -1,7 +1,7 @@
 
 "use client"
 
-
+import { HiStar } from "react-icons/hi2";
 import Search from "@/app/_components/serachByTitle";
 import Image from 'next/image'
 import logo from '../_images/epictown.svg'
@@ -36,8 +36,9 @@ const Header =()=>{
                     </ul>
                 </div>
             </div>
-            <div className="d-flex gap-3">
-                {(userState.type=== 'admin') &&(<a href={`/Products`}>adminDashboard</a>)}
+            <div className="d-flex gap-3 secondaryNavItems">
+                {userState.isLoggedIn && ( <a className="favorites" href={`/Favorites`}><HiStar style={{ fontSize: '1.7rem', color: 'gold' }}/>favorites</a> )}
+                {(userState.type=== 'admin') &&(<a className="dashboard" href={`/Products`}>dashboard</a>)}
                 <Search/>
                 <div className="vr"></div>
                 {userState.isLoggedIn ? (

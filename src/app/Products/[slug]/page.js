@@ -9,6 +9,7 @@ import Navbar from "@/app/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import "bootstrap/dist/css/bootstrap.css"
 import "../../singleProduct.css"
+import Favorites from "@/app/_components/Favorites";
 
 
 export default function Products ({params}){
@@ -60,6 +61,8 @@ export default function Products ({params}){
                                     <h5>Descripton</h5>
                                     <i>{comic.description}</i>
                                     <p>{comic.format}</p>
+                                    <div className="position-relative"><Favorites comicId={comic.id}/></div>
+
                                 </div>
 
 

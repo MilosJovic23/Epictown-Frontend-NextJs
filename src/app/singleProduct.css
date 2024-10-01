@@ -16,15 +16,12 @@ body {
 .singleProductTitle{
     width:65%;
     text-align: end;
+    position: relative;
 }
 .singleProductTitle p{
     color: #7e7e7e;
     font-size: 1rem;
-}
-.singleProductTitle p:last-child{
-    color: #bdbdbd;
-    font-size: 1rem;
-    margin-top:2em;
+    padding-top:1em;
 }
 
 .singleProductTitle h1{

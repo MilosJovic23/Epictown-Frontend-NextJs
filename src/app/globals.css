@@ -113,9 +113,10 @@ a {
 }
 .navBar a{
     font-weight: 500;
+    color: #ff0000;
 }
 .navBar a:hover{
-    color: #707070;
+    color: #383838;
 }
 .logo-img{
     align-self: center;
@@ -123,6 +124,12 @@ a {
 .logo-img:hover{
     opacity: 85%;
 }
+
+
+.secondaryNavItems a:first-child{
+    color:gold;
+}
+
 
 /*
     css for Favorites component
@@ -137,9 +144,7 @@ a {
     background-color: transparent;
     border-radius: 5px;
 }
-.like-button:hover{
-    color: red;
-}
+
 
 @media (prefers-color-scheme: dark) {
   html {
