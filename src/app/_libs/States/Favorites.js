@@ -5,8 +5,8 @@ import {atom} from "recoil";
 
 const {persistAtom}=recoilPersist();
 
-export const FavoritesComics = atom({
-    key:"FavoritesComics",
+export const FavoriteComics = atom({
+    key:"FavoriteComics",
     default: [],
     effects_UNSTABLE:[persistAtom]
 });
