@@ -2,13 +2,13 @@
 
 
 import { HiOutlineStar,HiStar } from "react-icons/hi2";
-import {useRecoilState, useSetRecoilState} from "recoil";
-import {FavoritesComics} from "@/app/_libs/States/Favorites";
-import {useEffect, useState} from "react";
+import { useRecoilState } from "recoil";
+import { FavoriteComics } from "@/app/_libs/States/Favorites";
+
 
 const Favorites = ({comicId}) =>{
 
-    const [favorites, setFavorites] = useRecoilState(FavoritesComics);
+    const [favorites, setFavorites] = useRecoilState(FavoriteComics);
 
     const addToFavorites = () =>{
 
