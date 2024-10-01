@@ -13,15 +13,24 @@ const Favorites = ({comicId}) =>{
     const favorites = useSetRecoilState(FavoritesComics);
 
 
-    const addToFavorites = (e) =>{
+    const addToFavorites = () =>{
 
-        console.log(comicId);
-        // setFavorites(comicId);
+
+        setFavorites((prevFavorites) => {
+
+            const currentFavorites = Array.isArray(prevFavorites) ? prevFavorites : [];
+
+            return currentFavorites.includes(comicId)
+                ? currentFavorites.filter((id) => id !== comicId)
+                : [...currentFavorites, comicId]
+        });
+
         setIsClicked(!IsClicked);
 
-        console.log(`Comic ID: ${comicId}, isClicked: ${IsClicked}`);
+
 
     }
+
 
 
 
