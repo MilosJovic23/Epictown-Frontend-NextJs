@@ -37,8 +37,8 @@ const Header =()=>{
                 </div>
             </div>
             <div className="d-flex gap-3 secondaryNavItems">
-                {userState.isLoggedIn && ( <a className="favorites" href={`/Favorites`}><HiStar style={{ fontSize: '1.7rem', color: 'gold' }}/>favorites</a> )}
-                {(userState.type=== 'admin') &&(<a className="dashboard" href={`/Products`}>dashboard</a>)}
+                {userState.isLoggedIn && ( <a className="favorites align-self-center" href={`/Favorites`}><HiStar style={{ fontSize: '1.2rem', color: 'gold' }}/>favorites</a> )}
+                {(userState.type=== 'admin') &&(<a className="dashboard align-self-center" href={`/Products`}>dashboard</a>)}
                 <Search/>
                 <div className="vr"></div>
                 {userState.isLoggedIn ? (
