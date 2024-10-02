@@ -1,0 +1,74 @@
+
+.blogSection{
+    background-color: #F9F8F6;
+    padding: 4em 0;
+}
+.gridContainer{
+    display: grid;
+    grid-auto-columns: 1fr;
+    padding-block: 2rem;
+    margin-inline: auto;
+    grid-gap: 1em;
+    grid-template-areas:
+    "one"
+    "two"
+    "three"
+    "four"
+    "five";
+}
+.gridContainer h2{
+    color: #252525;
+}
+.gridContainer h2:hover{
+    color: #ff5858;
+}
+.item{
+    padding: 1rem;
+    border-radius: 0.2rem;
+    background-color: white;
+}
+.item p{
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #505050;
+}
+.blog-item-1{
+    grid-area: one;
+}
+.blog-item-2{
+    grid-area: two;
+}
+.blog-item-3{
+    grid-area: three;
+}
+.blog-item-4{
+    grid-area: four;
+ }
+.blog-item-5{
+    grid-area: five;
+}
+
+@media screen and (min-width: 38em) {
+    .gridContainer {
+        grid-template-areas:
+     'one one'
+     'two five'
+     'three five'
+     'four four';
+    }
+}
+@media screen and (min-width: 54em) {
+    .testimonial-grid {
+        grid-template-areas:
+      "one one two"
+      "five five five"
+      "three four four";
+    }
+}
+@media screen and (min-width: 75em) {
+    .gridContainer {
+        grid-template-areas:
+      "one one two five"
+      "three four four five";
+    }
+}
