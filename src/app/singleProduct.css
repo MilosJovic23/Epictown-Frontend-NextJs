@@ -1,8 +1,5 @@
-html,
-body {
-    height: 100%;
-    background-color: #F9F8F6;
-}
+
+
 
 .singleProductWrapper{
     overflow: hidden;
@@ -39,6 +36,16 @@ body {
     object-fit: contain;
 }
 .productContainer{
-    height: calc(100% - (70px + 266px));
+    height:100%;
 
+}
+
+/**
+    blog posts css
+ */
+
+.BlogContainer{
+    width:80%;
+    max-width: 800px;
+    margin:0 auto;
 }
