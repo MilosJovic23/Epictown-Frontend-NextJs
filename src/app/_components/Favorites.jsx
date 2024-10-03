@@ -30,7 +30,7 @@ const Favorites = ({comicId}) =>{
 
     return <>
         {
-            userState.isLoggedIn && (<div onClick={addToFavorites} className="like-button" style={{cursor: 'pointer'}}>
+            userState.isLoggedIn && (<div onClick={ addToFavorites } className="like-button" style={{ cursor: 'pointer' }}>
                 {
                     !isFavorite ? (
                         <HiOutlineStar style={{fontSize: '1.7rem', color: 'black'}}/>
