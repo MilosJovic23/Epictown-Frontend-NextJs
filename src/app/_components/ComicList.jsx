@@ -25,15 +25,15 @@ const ComicList = ()=>{
 
     return<>
         <div className="MainContainer py-4">
-        <div className="comic-list-text d-flex justify-content-between py-3">
+        <div className="comic-list-text d-flex  justify-content-between py-3">
             <h5>Best rated</h5>
             <a href='/products'>view all</a>
         </div>
-        <div className="d-flex flex-wrap  justify-content-between">
+        <div className="d-flex flex-wrap py-2 gap-4  justify-content-center justify-content-sm-between">
             {
                 sortedProducts.map((comic,index)=>{
 
-                    return <div className="singleComicWrapper" key={index}>
+                    return <div className="singleComicWrapper w-25" key={index}>
 
                         <a href={`/Products/${comic.id}`} target="_blank">
                             <div className="singleComicImg noSelect">
