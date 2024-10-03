@@ -37,6 +37,10 @@ const Blog = ()=>{
                                         </div>
                                     </div>
                                     <i>{blog.description}</i>
+                                    {
+                                        blog.img && <img src={blog.img} alt={blog.title}/>
+                                    }
+
                                 </a>
 
                             </article>
