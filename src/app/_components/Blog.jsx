@@ -10,35 +10,34 @@ import {BlogState} from "@/app/_libs/States/BlogState";
 import fetchBlogPosts from "@/app/_functions/fetchBlogPosts";
 const Blog = ()=>{
 
-    const [blogPosts, setBlogPosts] = useRecoilState(BlogState);
+    const [blogPosts, setBlogPosts] = useRecoilState( BlogState );
 
     useEffect(() => {
-        fetchBlogPosts(setBlogPosts)
+        fetchBlogPosts( setBlogPosts )
     }, []);
 
 
-    console.log(blogPosts);
     return <>
 
         <section className="blogSection">
 
             <main className="MainContainer gridContainer">
                 {
-                    blogPosts.map(blog => {
+                    blogPosts.map( (blog,index) => {
                         return <>
-                            <article className={`blogItem item blog-item-${blog.id}`}>
-                                <a href={`/Blog/${blog.id}`}>
+                            <article key={ index } className={`blogItem item blog-item-${ blog.id }`}>
+                                <a href={`/Blog/${ blog.id }`}>
                                     <div>
                                         <div>
-                                            <h2>{blog.title}</h2>
+                                            <h2>{ blog.title }</h2>
                                         </div>
                                         <div>
-                                            <p>{blog.date}</p>
+                                            <p>{ blog.date }</p>
                                         </div>
                                     </div>
-                                    <i>{blog.description}</i>
+                                    <i>{ blog.description }</i>
                                     {
-                                        blog.img && <img src={blog.img} alt={blog.title}/>
+                                        blog.img && <img src={ blog.img } alt={ blog.title }/>
                                     }
 
                                 </a>
