@@ -5,12 +5,12 @@ import "../Hero.css"
 import 'bootstrap/dist/css/bootstrap.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import {useRecoilState} from "recoil";
-import {ComicsState} from "@/app/_libs/States/ComicsState";
-import Favorites from "@/app/_components/Favorites";
+import { useRecoilState } from "recoil";
+import { ComicsState } from "@/app/_libs/States/ComicsState";
+
 const Hero = () =>{
 
-    const [comics, setComics] = useRecoilState(ComicsState);
+    const [comics, setComics] = useRecoilState( ComicsState );
 
     const responsive = {
         superLargeDesktop: {
@@ -40,16 +40,16 @@ const Hero = () =>{
             <div className="MainContainer d-flex justify-content-between">
                 <div className="hero-col">
                     <h1>Graphic novels, comic books and much more</h1>
-                    <a id="exploreBtn" href="#">explore</a>
+                    <a id="exploreBtn" href="/Products/AllProducts">explore</a>
                 </div>
                 <div className="hero-col">
-                    <Carousel  responsive={responsive}>
+                    <Carousel  responsive={ responsive }>
                         {
-                            comics.map((comic,index)=>{
-                                return <div className="comicCarousel" key={index}>
-                                    <a href={`/Products/${comic.id}`} target="_blank">
+                            comics.map( ( comic,index ) => {
+                                return <div className="comicCarousel" key={ index }>
+                                    <a href={`/Products/${ comic.id }`} target="_blank">
                                         <div className="comicCarouselImg">
-                                            <img src={comic.imgURL}/>
+                                            <img src={ comic.imgURL }/>
                                         </div>
 
 

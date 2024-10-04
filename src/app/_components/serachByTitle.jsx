@@ -47,7 +47,7 @@ const Search = ()=>{
                 <div className="searchContainer">
                     <span className="icon"><AiOutlineSearch/></span>
                     <input placeholder="search comics" onInput={search}
-                           onChange={e => setSearchTerm(e.currentTarget.value)} value={searchTerm}/>
+                           onChange={e => setSearchTerm( e.currentTarget.value )} value={ searchTerm }/>
                 </div>
 
             </form>
@@ -55,36 +55,30 @@ const Search = ()=>{
 
 
             {
-                searchTerm.length>0 &&
+                searchTerm.length > 0 &&
 
+                <div className="searchResultsStyle">
 
+                    { searchResults.map(( comic, index) => {
+                        return <div className="result-item"  key={ index }>
+                                    <div className="resultCard">
+                                        <a href={`/Products/${ comic.id }`} target="_blank">
 
-                (<div className="searchResultsStyle">
+                                            <div className="imgHover">
+                                                <img src={ comic.imgURL }/>
+                                                <div className="text">{ comic.title }</div>
+                                            </div>
 
-                    { searchResults.map((comic, index) => {
-                        return <div className="result-item"  key={index}>
-                            <div className="resultCard">
-                                <a href={`/Products/${comic.id}`} target="_blank">
+                                        </a>
 
-                                    <div className="imgHover">
-                                        <img src={comic.imgURL}/>
-                                        <div className="text">{comic.title}</div>
                                     </div>
-
-
-                                </a>
-
-
-                            </div>
-
-                        </div>
+                                </div>
                     })}
 
                 </div>
-                )
+
 
             }
-
 
 
 
