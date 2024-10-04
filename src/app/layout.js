@@ -20,12 +20,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={dmSans_init.variable} >
-      <RecoilContextProvider>
-          {children}
-      </RecoilContextProvider>
 
-      </body>
-    </html>
-  );
+    <RecoilContextProvider>
+        <body className={dmSans_init.variable}>
+            {children}
+        </body>
+    </RecoilContextProvider>
+
+</html>
+)
+    ;
 }

@@ -1,7 +1,7 @@
 
 "use client"
 
-import Header from "@/app/_components/Navbar";
+import Header from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 
 import {useRouter} from "next/navigation";

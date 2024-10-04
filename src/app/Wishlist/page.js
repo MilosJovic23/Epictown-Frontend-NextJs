@@ -4,7 +4,7 @@ import {useRecoilState} from "recoil";
 import {FavoriteComics} from "@/app/_libs/States/Favorites";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
 import {useEffect} from "react";
-import Navbar from "@/app/_components/Navbar";
+import Navbar from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 import Favorites from "@/app/_components/Favorites";
 

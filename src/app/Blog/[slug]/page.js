@@ -5,7 +5,7 @@ import {useRecoilState, } from "recoil";
 
 
 import {useEffect, useState} from "react";
-import Navbar from "@/app/_components/Navbar";
+import Navbar from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 import "bootstrap/dist/css/bootstrap.css"
 import "../../singleProduct.css"
