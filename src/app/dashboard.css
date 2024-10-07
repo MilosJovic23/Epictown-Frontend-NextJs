@@ -1,0 +1,15 @@
+
+
+
+.form input, label{
+    width:100%;
+    max-width: 170px;
+
+}
+.form  label {
+
+}
+.col{
+    padding: 0;
+    margin:0;
+}
