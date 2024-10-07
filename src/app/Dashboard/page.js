@@ -9,29 +9,56 @@ import {useEffect, useState} from "react";
 
 import fetchComics from "@/app/_functions/fetchComics";
 import createNewItem from "@/app/_functions/CreateNewItem";
+import CreateNewItem from "@/app/_functions/CreateNewItem";
 
 export default function Dashboard() {
 
-    const data = {
-        "id":22,
-        "title":"New Comic",
-        "rating":2.1
-    };
-
+    const [formData, setFormData] = useState({
+        title: "" ,
+        author: "" ,
+        description: "" ,
+        id: null ,
+        imgUrl: "" ,
+        rating: null
+    });
     const [ comics, setComics ] = useState([]);
 
     useEffect(() => {
         fetchComics(setComics);
+
     }, []);
 
 
-    const HandleSubmit = () =>{
-        console.log("works");
+    const handleInputChange = (e)=>{
+        const { name, value } = e.target;
+
+        setFormData((prevData)=>({
+            ...prevData,
+            [name]:value
+        }));
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
     };
 
-    useEffect(() => {
-        createNewItem(data);
-    }, [HandleSubmit]);
+
+
+    useEffect(()=>{
+
+        const IdCheck = comics.some(comic => comic.id !== parseInt(formData.id) );
+        console.log(IdCheck);
+
+        // if ( IdCheck || formData.id !== null ){
+        //
+        //     console.log("there is no item with that id")
+        // }
+
+    },[handleSubmit]);
+
+
+
+
 
 
 
@@ -41,67 +68,70 @@ export default function Dashboard() {
 
         <div className="MainContainer">
 
-            <form className="row gap-2" onSubmit={ HandleSubmit }>
+            <form className="row gap-2" onSubmit={handleSubmit}>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="comic title" className="form-control" id="inputTitle" aria-label="Enter comic title"
+                        type={'text'} placeholder="Title" value={formData.title} name="title" onChange={handleInputChange}  className="form-control"
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="description" className="form-control" id="inputDescription"
+                        type="text" placeholder="Description" value={formData.description} name="description" onChange={handleInputChange} className="form-control"
                     />
 
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="author" className="form-control" id="inputAuthor"
+                        type="text" placeholder="Author" value={formData.author} name="author" onChange={handleInputChange} className="form-control"
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="format" className="form-control" id="inputFormat"
+                        type="text" placeholder="Format" value={formData.format} name="format" onChange={handleInputChange} className="form-control"
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="number" placeholder="rating" className="form-control" id="inputFormat"
+                        placeholder="Rating" value={formData.rating} type="number" min="0" max="5.0" name="rating" onChange={handleInputChange} className="form-control"
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="number" placeholder="comicId" className="form-control" id="inputId"
+                        type="number" placeholder="Id" value={formData.id} name="id" onChange={handleInputChange} className="form-control"
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="imgUrl" className="form-control" id="inputImgUrl"
+                        type="text" placeholder="imgUrl" value={formData.imgUrl} name="imgUrl" onChange={handleInputChange} className="form-control"
                     />
                 </div>
-                <button className="btn btn-dark w-auto" type="button">submit</button>
+                <button className="btn btn-dark w-auto" type="submit">submit</button>
 
             </form>
         </div>
 
         <div>
-            {
-                comics.map( (comic) => {
-                    return <>
-                        <h1>{comic.title}</h1>
+            <table className="table table-striped table-dark table-hover">
+                {
+                    comics.map((comic) => {
+                        return <>
+
+                        <tr>
+                            <td className="table-danger">{ comic.title }</td>
+                        </tr>
+
                     </>
-                })
-            }
+                    })
+                }
+            </table>
         </div>
-
-
-
 
 
     </>

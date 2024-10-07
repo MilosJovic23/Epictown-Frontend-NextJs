@@ -13,3 +13,46 @@
     padding: 0;
     margin:0;
 }
+
+
+.table_component {
+     overflow: auto;
+     width: 100%;
+ }
+
+.table_component table {
+    border: 1px none #7070ff;
+    height: 100%;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: left;
+}
+
+.table_component caption {
+    caption-side: top;
+    text-align: left;
+}
+
+.table_component th {
+    border: 1px none #7070ff;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 5px;
+}
+
+.table_component td {
+    border: 1px none #7070ff;
+    padding: 5px;
+}
+
+.table_component tr:nth-child(even) td {
+    background-color: #dedede;
+    color: #000000;
+}
+
+.table_component tr:nth-child(odd) td {
+    background-color: #ffffff;
+    color: #000000;
+}
