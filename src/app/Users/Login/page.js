@@ -26,7 +26,7 @@ export default function Login ({params}){
             if (data.username === user.email || data.password === user.password){
                 setUserState({"isLoggedIn":true,"type":user.type});
                 router.push('/');
-            } else{console.log("wrong") }
+            } else{console.log("wrong credentials") }
         })
 
 
