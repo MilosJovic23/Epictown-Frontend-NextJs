@@ -43,7 +43,7 @@ const Header =()=>{
                     <a className="favorites align-self-center d-flex align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>)
                 }
                 { (userState.type === 'admin') && (
-                    <a className="dashboard align-self-center" href={`/Products`}>dashboard</a>)
+                    <a className="dashboard align-self-center" href={`/Dashboard`}>dashboard</a>)
                 }
                 <Search/>
                 <div className="vr"></div>
