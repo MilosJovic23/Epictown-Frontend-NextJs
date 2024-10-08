@@ -11,18 +11,29 @@ import "bootstrap/dist/css/bootstrap.css"
 import "../../singleProduct.css"
 import Favorites from "@/app/_components/Favorites";
 import Header from "@/app/_components/Header";
+import fetchComics from "@/app/_functions/fetchComics";
 
 
 export default function Products ( { params } ){
 
     const [isMounted, setIsMounted] = useState(false);
-    const [comics, setComics] = useRecoilState( ComicsState );
+    const [ comics, setComics ] = useState([]);
+
 
 
 
     useEffect(() => {
-        setIsMounted(true);
+        const getComics = async () => {
+            await fetchComics(setComics);
+        };
+
+        getComics();
     }, []);
+
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, [comics,setComics]);
 
     if(!isMounted){
         return <h5>loading..</h5>

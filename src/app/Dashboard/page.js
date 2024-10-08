@@ -11,6 +11,7 @@ import fetchComics from "@/app/_functions/fetchComics";
 
 import {collection, addDoc} from "firebase/firestore";
 import {db} from "@/app/firebase";
+import Footer from "@/app/_components/Footer";
 
 
 export default function Dashboard() {
@@ -33,7 +34,7 @@ export default function Dashboard() {
         getComics();
     }, []);
 
-    console.log(comics)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -59,8 +60,6 @@ export default function Dashboard() {
     }
 
 
-    console.log(formData)
-
 
 
 
@@ -70,7 +69,7 @@ export default function Dashboard() {
 
 
         <div className="MainContainer my-4 pt-5">
-            <h4>Add new item to db</h4>
+            <h4 className="py-2">Add new item to database</h4>
             <form className="row gap-2" onSubmit={handleSubmit}>
 
                 <div className="col">
@@ -160,7 +159,7 @@ export default function Dashboard() {
                 }
             </table>
         </div>
-
+        <Footer/>
 
     </>
 };

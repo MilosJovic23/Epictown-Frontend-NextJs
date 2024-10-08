@@ -2,20 +2,30 @@
 
 
 
-import { useRecoilValue } from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 import { ComicsState } from "@/app/_libs/States/ComicsState";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import "../search.css"
 import Favorites from "@/app/_components/Favorites";
+import fetchComics from "@/app/_functions/fetchComics";
 
 const Search = ()=>{
 
     const [searchTerm,setSearchTerm]=useState("");
     const [searchResults,setSearchResults]=useState([]);
 
-    const comics= useRecoilValue( ComicsState );
+    const comics = useRecoilValue( ComicsState );
+    const setComics = useSetRecoilState(ComicsState)
+    // const [ comics, setComics ] = useState([]);
 
+    useEffect(() => {
+        const getComics = async () => {
+            await fetchComics(setComics);
+        };
+
+        getComics();
+    }, []);
 
     let resultsByTitle=[];
 

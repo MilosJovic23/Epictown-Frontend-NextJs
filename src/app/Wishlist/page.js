@@ -3,19 +3,28 @@
 import {useRecoilState} from "recoil";
 import {FavoriteComics} from "@/app/_libs/States/Favorites";
 import {ComicsState} from "@/app/_libs/States/ComicsState";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Navbar from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 import Favorites from "@/app/_components/Favorites";
+import fetchComics from "@/app/_functions/fetchComics";
 
 
 export default  function Wishlist () {
 
 
     const [favorites,setFavorites] = useRecoilState(FavoriteComics);
-    const [comic,setComics] = useRecoilState(ComicsState);
+    const [ comics, setComics ] = useState([]);
 
-    const filteredFavorites = comic.filter((el)=> favorites.includes(el.id) )
+    useEffect(() => {
+        const getComics = async () => {
+            await fetchComics(setComics);
+        };
+
+        getComics();
+    }, []);
+
+    const filteredFavorites = comics.filter((el)=> favorites.includes(el.id) )
 
     console.log(filteredFavorites);
 

@@ -3,20 +3,21 @@
 
 import Footer from "@/app/_components/Footer";
 import Favorites from "@/app/_components/Favorites";
-import { useRecoilState } from "recoil";
-import { ComicsState } from "@/app/_libs/States/ComicsState";
 import fetchComics from "@/app/_functions/fetchComics";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import Header from "@/app/_components/Header";
 
 
 export default function AllProducts() {
 
-    const [comics, setComics] = useRecoilState( ComicsState );
-
+    const [ comics, setComics ] = useState([]);
 
     useEffect(() => {
-        fetchComics( setComics );
+        const getComics = async () => {
+            await fetchComics(setComics);
+        };
+
+        getComics();
     }, []);
 
 
