@@ -53,7 +53,7 @@ export default function Products ( { params } ){
                             <div className="singleProductWrapper d-flex justify-content-between " key={ comic.id }>
 
                                 <div className="singleProductImg">
-                                    <img src={ comic.imgURL }/>
+                                    <img src={ comic.imgURL } alt={comic.title}/>
                                 </div>
                                 <div className="singleProductTitle">
                                     <h1>{ comic.title }</h1>
