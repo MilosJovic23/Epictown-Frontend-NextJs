@@ -8,8 +8,10 @@ import "bootstrap/dist/css/bootstrap.css"
 import {useEffect, useState} from "react";
 
 import fetchComics from "@/app/_functions/fetchComics";
-import createNewItem from "@/app/_functions/CreateNewItem";
-import CreateNewItem from "@/app/_functions/CreateNewItem";
+
+import {collection, addDoc} from "firebase/firestore";
+import {db} from "@/app/firebase";
+
 
 export default function Dashboard() {
 
@@ -18,45 +20,46 @@ export default function Dashboard() {
         author: "" ,
         description: "" ,
         id: null ,
-        imgUrl: "" ,
+        imgURL: "" ,
         rating: null
     });
     const [ comics, setComics ] = useState([]);
 
     useEffect(() => {
-        fetchComics(setComics);
+        const getComics = async () => {
+            await fetchComics(setComics);
+        };
 
+        getComics();
     }, []);
 
+    console.log(comics)
 
-    const handleInputChange = (e)=>{
-        const { name, value } = e.target;
-
-        setFormData((prevData)=>({
-            ...prevData,
-            [name]:value
-        }));
-    }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        try {
+            const docRef = await addDoc(collection(db, 'comics'), formData);
+            console.log('Document written with ID: ', docRef.id);
+        } catch (error) {
+            console.error('Error adding document: ', error);
+        }
     };
 
 
 
-    useEffect(()=>{
+    const handleInputChange =  (e)=>{
+        const { name, value } = e.target;
 
-        const IdCheck = comics.some(comic => comic.id !== parseInt(formData.id) );
-        console.log(IdCheck);
+        const newValue =  (name === 'rating' || name === "id")  ? Number(value) : value;
 
-        // if ( IdCheck || formData.id !== null ){
-        //
-        //     console.log("there is no item with that id")
-        // }
-
-    },[handleSubmit]);
+        setFormData((prevData)=>({
+            ...prevData,
+            [name]:newValue
+        }));
+    }
 
 
+    console.log(formData)
 
 
 
@@ -66,68 +69,93 @@ export default function Dashboard() {
         <Header/>
 
 
-        <div className="MainContainer">
-
+        <div className="MainContainer my-4 pt-5">
+            <h4>Add new item to db</h4>
             <form className="row gap-2" onSubmit={handleSubmit}>
 
                 <div className="col">
                     <input
-                        type={'text'} placeholder="Title" value={formData.title} name="title" onChange={handleInputChange}  className="form-control"
+                        type={'text'} placeholder="Title" value={formData.title} name="title" onChange={handleInputChange}  className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="Description" value={formData.description} name="description" onChange={handleInputChange} className="form-control"
+                        type="text" placeholder="Description" value={formData.description} name="description" onChange={handleInputChange} className="form-control" required
                     />
 
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="Author" value={formData.author} name="author" onChange={handleInputChange} className="form-control"
+                        type="text" placeholder="Author" value={formData.author} name="author" onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="Format" value={formData.format} name="format" onChange={handleInputChange} className="form-control"
+                        type="text" placeholder="Format" value={formData.format} name="format" onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        placeholder="Rating" value={formData.rating} type="number" min="0" max="5.0" name="rating" onChange={handleInputChange} className="form-control"
+                        placeholder="Rating" value={formData.rating} type="number" step="0.1" min="0.0" max="5.0" name="rating" onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="number" placeholder="Id" value={formData.id} name="id" onChange={handleInputChange} className="form-control"
+                        type="number" placeholder="Id" value={formData.id} name="id" onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="imgUrl" value={formData.imgUrl} name="imgUrl" onChange={handleInputChange} className="form-control"
+                        type="text" placeholder="imgUrl" value={formData.imgUrl} name="imgUrl" onChange={handleInputChange} className="form-control" required
                     />
                 </div>
-                <button className="btn btn-dark w-auto" type="submit">submit</button>
+                <button className="btn btn-dark w-auto" type="submit">Add</button>
 
             </form>
         </div>
 
-        <div>
-            <table className="table table-striped table-dark table-hover">
+        <div className="MainContainer my-5">
+            <table className="table table-hover">
+                <thead>
+                <tr>
+
+                    <th>id</th>
+                    <th>title</th>
+                    <th>author</th>
+                    <th>rating</th>
+
+                </tr>
+                </thead>
                 {
-                    comics.map((comic) => {
+                    comics.map((comic, index) => {
                         return <>
 
-                        <tr>
-                            <td className="table-danger">{ comic.title }</td>
-                        </tr>
+                            <tbody key={index}>
+                            <tr>
+                                <td>{comic.id}</td>
+                                <td>{comic.title}</td>
+                                <td>{comic.author}</td>
+                                <td>{comic.rating}</td>
+                                <td>
+                                    <a type="button" className="btn btn-outline-dark btn-sm"
+                                       onClick={() => console.log(`Edit comic with id: ${comic.id}`)}>Edit</a>
+                                </td>
+                                <td>
+                                    <a type="button" className="btn btn-outline-danger btn-sm"
+                                       onClick={() => console.log(`Delete comic with id: ${comic.id}`)}>Delete</a>
+                                </td>
 
-                    </>
+                            </tr>
+                            </tbody>
+
+
+                        </>
                     })
                 }
             </table>
@@ -136,3 +164,4 @@ export default function Dashboard() {
 
     </>
 };
+
