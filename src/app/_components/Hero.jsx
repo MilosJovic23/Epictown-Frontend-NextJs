@@ -5,12 +5,20 @@ import "../Hero.css"
 import 'bootstrap/dist/css/bootstrap.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { useRecoilState } from "recoil";
-import { ComicsState } from "@/app/_libs/States/ComicsState";
+import fetchComics from "@/app/_functions/fetchComics";
+import {useEffect, useState} from "react";
 
 const Hero = () =>{
 
-    const [comics, setComics] = useRecoilState( ComicsState );
+    const [ comics, setComics ] = useState([]);
+
+    useEffect(() => {
+        const getComics = async () => {
+            await fetchComics(setComics);
+        };
+
+        getComics();
+    }, []);
 
     const responsive = {
         superLargeDesktop: {

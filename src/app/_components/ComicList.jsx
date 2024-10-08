@@ -6,17 +6,23 @@ import { useRecoilState } from "recoil";
 import { ComicsState } from "@/app/_libs/States/ComicsState";
 
 import fetchComics from "@/app/_functions/fetchComics";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import Favorites from "@/app/_components/Favorites";
 
 
 const ComicList = ()=> {
 
-    const [comics, setComics] = useRecoilState( ComicsState );
+    // const [comics, setComics] = useRecoilState( ComicsState );
 
+
+    const [ comics, setComics ] = useState([]);
 
     useEffect(() => {
-        fetchComics( setComics );
+        const getComics = async () => {
+            await fetchComics(setComics);
+        };
+
+        getComics();
     }, []);
 
 
@@ -33,7 +39,7 @@ const ComicList = ()=> {
             {
                 sortedProducts.map(( comic,index)=>{
 
-                    return <div className="singleComicWrapper w-25" key={ index }>
+                    return <div className="singleComicWrapper" key={ index }>
 
                         <a href={`/Products/${ comic.id }`} target="_blank">
                             <div className="singleComicImg noSelect">
