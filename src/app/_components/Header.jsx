@@ -28,7 +28,7 @@ const Header =()=>{
         <div
             className="MainContainer d-flex  justify-content-lg-between flex-lg-row flex-md-column align-items-md-center gap-md-3">
             <div className="d-flex w-50 gap-5">
-                <a href="/"><Image className="logo-img" src={logo} alt="Picture of the author" width="20px"
+                <a href="/"><Image className="logo-img"  priority="true" src={logo} alt="epictown logo" width="20px"
                                    height="20px"/></a>
                 <div className="navigation d-flex align-items-center">
                     <ul className="d-flex gap-4">
