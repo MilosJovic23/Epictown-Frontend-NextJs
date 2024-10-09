@@ -9,9 +9,10 @@ import {useEffect, useState} from "react";
 
 import fetchComics from "@/app/_functions/fetchComics";
 
-import {collection, addDoc} from "firebase/firestore";
+import {collection, addDoc, query, getDocs,where } from "firebase/firestore";
 import {db} from "@/app/firebase";
 import Footer from "@/app/_components/Footer";
+import deleteDocument from "@/app/_functions/deleteDocFirestore";
 
 
 export default function Dashboard() {
@@ -20,10 +21,11 @@ export default function Dashboard() {
         title: "" ,
         author: "" ,
         description: "" ,
-        id: null ,
+        id: "" ,
         imgURL: "" ,
-        rating: null
+        rating: ""
     });
+
     const [ comics, setComics ] = useState([]);
 
     useEffect(() => {
@@ -39,8 +41,14 @@ export default function Dashboard() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const docRef = await addDoc(collection(db, 'comics'), formData);
-            console.log('Document written with ID: ', docRef.id);
+            const q = query(collection(db, 'comics'), where('id', '==', formData.id));
+            const querySnapshot = await getDocs(q);
+
+            !querySnapshot.empty ?
+                console.log('Comic with the same title already exists!')
+                :
+                console.log('Document written with ID: ', (await addDoc(collection(db, 'comics'), formData)).id);
+
         } catch (error) {
             console.error('Error adding document: ', error);
         }
@@ -51,7 +59,7 @@ export default function Dashboard() {
     const handleInputChange =  (e)=>{
         const { name, value } = e.target;
 
-        const newValue =  (name === 'rating' || name === "id")  ? Number(value) : value;
+        const newValue =  (name === 'rating' || name === "id") ? Number(value) : value;
 
         setFormData((prevData)=>({
             ...prevData,
@@ -60,7 +68,20 @@ export default function Dashboard() {
     }
 
 
+    const deleteItem = async (comicId) =>{
 
+        const filteredComics = comics.filter( comic=> comic.id !== comicId );
+        setComics(filteredComics);
+
+        const q = query(collection(db, "comics"), where("id", "==", comicId ));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach((doc) => {
+            console.log(`Document ID: ${doc.id}`);
+            deleteDocument("comics",doc.id)
+        });
+
+    }
 
 
 
@@ -111,7 +132,7 @@ export default function Dashboard() {
 
                 <div className="col">
                     <input
-                        type="text" placeholder="imgUrl" value={formData.imgUrl} name="imgUrl" onChange={handleInputChange} className="form-control" required
+                        type="text" placeholder="imgUrl" value={formData.imgURL} name="imgURL" onChange={handleInputChange} className="form-control"
                     />
                 </div>
                 <button className="btn btn-dark w-auto" type="submit">Add</button>
@@ -147,7 +168,7 @@ export default function Dashboard() {
                                 </td>
                                 <td>
                                     <a type="button" className="btn btn-outline-danger btn-sm"
-                                       onClick={() => console.log(`Delete comic with id: ${comic.id}`)}>Delete</a>
+                                       onClick={ ()=> deleteItem(comic.id) }>Delete</a>
                                 </td>
 
                             </tr>
