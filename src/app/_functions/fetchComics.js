@@ -13,6 +13,7 @@ const fetchComics = async( setComics )=>{
             id: doc.id,
             ...doc.data(),
         }));
+
         setComics( comicList );
     }catch  ( error ) {
         console.error('Error fetching comics: ', error);
