@@ -70,7 +70,7 @@ a {
 }
 
 
-.comicTitle{
+.comicTitle {
     padding: 0.4em 1.5em 2em 0.4em;
     overflow: hidden;
     position: relative;
@@ -82,7 +82,7 @@ a {
 }
 
 
-.comicTitle h5{
+.comicTitle h5 {
     font-weight: 600;
     margin:0;
 }
@@ -98,37 +98,37 @@ a {
 .noSelect:focus {
     outline: none !important;
 }
-.singleComicWrapper{
+.singleComicWrapper {
     max-width:190px;
     overflow: hidden;
     max-height: 420px;
 }
 
 
-.MainContainer{
+.MainContainer {
     width:80%;
     max-width: 1500px;
     margin:0 auto;
 }
-.navBar{
+.navBar {
     background-color: #ffffff;
     padding: 1.4em 0;
 }
-.navigation ul{
+.navigation ul {
     margin:0;
     padding:0;
 }
-.navBar a{
+.navBar a {
     font-weight: 500;
     color: #000000;
 }
-.navBar a:hover{
+.navBar a:hover {
     color:red;
 }
-.logo-img{
+.logo-img {
     align-self: center;
 }
-.logo-img:hover{
+.logo-img:hover {
     opacity: 85%;
 }
 
@@ -144,7 +144,7 @@ a {
     css for Favorites component
 **/
 
-.like-button{
+.like-button {
     border:none;
     position: absolute;
     top: 5px;
