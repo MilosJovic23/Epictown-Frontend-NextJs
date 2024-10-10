@@ -18,7 +18,7 @@ const Header =()=>{
 
     const logout = ( e )=>{
         e.preventDefault();
-        setUserState({"isLoggedIn":false})
+        setUserState({"isLoggedIn":false});
 
     }
 
@@ -40,17 +40,29 @@ const Header =()=>{
             </div>
             <div className="d-flex gap-3 secondaryNavItems">
                 { userState.isLoggedIn && (
-                    <a className="favorites align-self-center d-flex align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>)
+
+                        <a className="favorites align-self-center d-flex align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>
+
+                )
                 }
-                { (userState.type === 'admin') && (
-                    <a className="dashboard align-self-center" href={`/Dashboard`}>dashboard</a>)
+                {(userState.type === 'admin') && (
+
+                        <a className="dashboard align-self-center" href={`/Dashboard`}>dashboard</a>
+
+                )
                 }
                 <Search/>
                 <div className="vr"></div>
                 { userState.isLoggedIn ? (
-                    <a className="align-self-center" href="#" onClick={e => logout(e)}>logout</a>
+
+                         <a className="align-self-center" href="#" onClick={e => logout(e)}>logout</a>
+
+
                 ) : (
-                    <a className="align-self-center" href={`/Users/Login`}>login</a>
+
+                         <a className="align-self-center" href={`/Users/Login`}>login</a>
+
+
                 )}
 
             </div>
