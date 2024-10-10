@@ -13,9 +13,10 @@ import {collection, addDoc, query, getDocs,where } from "firebase/firestore";
 import {db} from "@/app/firebase";
 import Footer from "@/app/_components/Footer";
 import deleteDocument from "@/app/_functions/deleteDocFirestore";
+import useFirestoreCollection from "@/app/_functions/firestoreCollection";
 
 
-export default function Dashboard() {
+export default function Dashboard () {
 
     const [formData, setFormData] = useState({
         title: "" ,
@@ -26,16 +27,16 @@ export default function Dashboard() {
         rating: ""
     });
 
-    const [ comics, setComics ] = useState([]);
 
-    useEffect(() => {
-        const getComics = async () => {
-            await fetchComics(setComics);
-        };
+    const [ addDocError,setAddDocError ] =useState("");
+    const [ isSameId,setIsSameId ] = useState(false)
 
-        getComics();
-    }, []);
 
+    const { data: comics, loading } = useFirestoreCollection("comics");
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
 
     const handleSubmit = async (e) => {
@@ -44,11 +45,15 @@ export default function Dashboard() {
             const q = query(collection(db, 'comics'), where('id', '==', formData.id));
             const querySnapshot = await getDocs(q);
 
-            !querySnapshot.empty ?
-                console.log('Comic with the same title already exists!')
-                :
-                console.log('Document written with ID: ', (await addDoc(collection(db, 'comics'), formData)).id);
+            if (!querySnapshot.empty) {
+                setAddDocError('Comic with the same id already exists!');
+                setIsSameId(true);
+            } else {
+                setIsSameId(false);
+                const docRef = await addDoc(collection(db, 'comics'), formData);
+                console.log('Document written with ID: ', docRef.id);
 
+            }
         } catch (error) {
             console.error('Error adding document: ', error);
         }
@@ -70,25 +75,23 @@ export default function Dashboard() {
 
     const deleteItem = async (comicId) =>{
 
-        const filteredComics = comics.filter( comic=> comic.id !== comicId );
-        setComics(filteredComics);
-
         const q = query(collection(db, "comics"), where("id", "==", comicId ));
         const querySnapshot = await getDocs(q);
 
         querySnapshot.forEach((doc) => {
-            console.log(`Document ID: ${doc.id}`);
             deleteDocument("comics",doc.id)
         });
 
     }
 
+    const editItem = (comic) =>{
 
+        console.log(comic);
+
+    }
 
     return <>
         <Header/>
-
-
         <div className="MainContainer my-4 pt-5">
             <h4 className="py-2">Add new item to database</h4>
             <form className="row gap-2" onSubmit={handleSubmit}>
@@ -124,14 +127,16 @@ export default function Dashboard() {
                     />
                 </div>
 
-                <div className="col">
+                <div className="col position-relative">
                     <input
-                        type="number" placeholder="Id" value={formData.id} name="id" onChange={handleInputChange} className="form-control" required
+                        type="number" placeholder="Id" value={formData.id} name="id" id="floatingInputInvalid" onChange={handleInputChange}
+                        className="form-control" required
                     />
+                    { !isSameId && (<p className="position-absolute">{addDocError}</p>) }
                 </div>
 
                 <div className="col">
-                    <input
+                <input
                         type="text" placeholder="imgUrl" value={formData.imgURL} name="imgURL" onChange={handleInputChange} className="form-control"
                     />
                 </div>
@@ -164,11 +169,14 @@ export default function Dashboard() {
                                 <td>{comic.rating}</td>
                                 <td>
                                     <a type="button" className="btn btn-outline-dark btn-sm"
-                                       onClick={() => console.log(`Edit comic with id: ${comic.id}`)}>Edit</a>
+                                       onClick={() => editItem(comic) }>Edit</a>
+                                </td>
+                                <td>
+
                                 </td>
                                 <td>
                                     <a type="button" className="btn btn-outline-danger btn-sm"
-                                       onClick={ ()=> deleteItem(comic.id) }>Delete</a>
+                                       onClick={() => deleteItem(comic.id) }>Delete</a>
                                 </td>
 
                             </tr>
