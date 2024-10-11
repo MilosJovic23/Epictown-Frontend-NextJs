@@ -5,20 +5,21 @@ import Header from "@/app/_components/Header";
 import "../dashboard.css"
 import "bootstrap/dist/css/bootstrap.css"
 
-import {useEffect, useState} from "react";
+import { useState } from "react";
 
-import fetchComics from "@/app/_functions/fetchComics";
+
 
 import {collection, addDoc, query, getDocs,where } from "firebase/firestore";
 import {db} from "@/app/firebase";
 import Footer from "@/app/_components/Footer";
 import deleteDocument from "@/app/_functions/deleteDocFirestore";
 import useFirestoreCollection from "@/app/_functions/firestoreCollection";
+import editDocument from "@/app/_functions/editDocFirestore";
 
 
 export default function Dashboard () {
 
-    const [formData, setFormData] = useState({
+    const [ formData, setFormData ] = useState({
         title: "" ,
         author: "" ,
         description: "" ,
@@ -27,10 +28,17 @@ export default function Dashboard () {
         rating: ""
     });
 
+    const [ EditFormData, setEditFormData ] = useState({
+        title: "" ,
+        author: "" ,
+        description: "" ,
+        id: "" ,
+        imgURL: "" ,
+        rating: ""
+    });
 
     const [ addDocError,setAddDocError ] =useState("");
-    const [ isSameId,setIsSameId ] = useState(false)
-
+    const [ EditComicId,setEditComicId ] = useState(null)
 
     const { data: comics, loading } = useFirestoreCollection("comics");
 
@@ -47,9 +55,8 @@ export default function Dashboard () {
 
             if (!querySnapshot.empty) {
                 setAddDocError('Comic with the same id already exists!');
-                setIsSameId(true);
+
             } else {
-                setIsSameId(false);
                 const docRef = await addDoc(collection(db, 'comics'), formData);
                 console.log('Document written with ID: ', docRef.id);
 
@@ -57,6 +64,12 @@ export default function Dashboard () {
         } catch (error) {
             console.error('Error adding document: ', error);
         }
+        setFormData({ title: "" ,
+            author: "" ,
+            description: "" ,
+            id: "" ,
+            imgURL: "" ,
+            rating: ""})
     };
 
 
@@ -72,6 +85,16 @@ export default function Dashboard () {
         }));
     }
 
+    const handleEditInputChange =  (e)=>{
+        const { name, value } = e.target;
+
+        const newValue =  (name === 'rating' || name === "id") ? Number(value) : value
+
+        setEditFormData((prevData)=>({
+            ...prevData,
+            [name]:newValue
+        }));
+    }
 
     const deleteItem = async (comicId) =>{
 
@@ -83,18 +106,30 @@ export default function Dashboard () {
         });
 
     }
+    const EditComic = (comic)=>{
+        setEditComicId(comic.id);
+        setEditFormData(comic);
+        console.log(EditFormData,EditComicId)
+    }
+    const handleEditSubmit = async (e,comic) => {
+        e.preventDefault();
 
-    const editItem = (comic) =>{
 
-        console.log(comic);
+        const q = query(collection(db, "comics"), where("id", "==", EditComicId ));
+        const querySnapshot = await getDocs(q);
 
+        querySnapshot.forEach( (doc)  => {
+            editDocument("comics",doc.id,EditFormData)
+        });
+
+        setEditComicId(null);
     }
 
     return <>
         <Header/>
         <div className="MainContainer my-4 pt-5">
             <h4 className="py-2">Add new item to database</h4>
-            <form className="row gap-2" onSubmit={handleSubmit}>
+            <form className="d-flex gap-2" onSubmit={handleSubmit}>
 
                 <div className="col">
                     <input
@@ -132,7 +167,6 @@ export default function Dashboard () {
                         type="number" placeholder="Id" value={formData.id} name="id" id="floatingInputInvalid" onChange={handleInputChange}
                         className="form-control" required
                     />
-                    { !isSameId && (<p className="position-absolute">{addDocError}</p>) }
                 </div>
 
                 <div className="col">
@@ -161,27 +195,64 @@ export default function Dashboard () {
                     comics.map((comic, index) => {
                         return <>
 
+
+
                             <tbody key={index}>
-                            <tr>
-                                <td>{comic.id}</td>
-                                <td>{comic.title}</td>
-                                <td>{comic.author}</td>
-                                <td>{comic.rating}</td>
-                                <td>
-                                    <a type="button" className="btn btn-outline-dark btn-sm"
-                                       onClick={() => editItem(comic) }>Edit</a>
-                                </td>
-                                <td>
+                            {
+                                EditComicId === comic.id ?
+                                    <tr><td colspan="7" rowSpan="3" className="table-active"><form className="d-flex gap-1" onSubmit={ e=>handleEditSubmit(e,comic) }>
 
-                                </td>
-                                <td>
-                                    <a type="button" className="btn btn-outline-danger btn-sm"
-                                       onClick={() => deleteItem(comic.id) }>Delete</a>
-                                </td>
+                                            <input
+                                                type='text' placeholder="Title" defaultValue={comic.title}   name="title"
+                                                onChange={handleEditInputChange} className="form-control"
+                                            />
+                                            <input
+                                                type="text" placeholder="Description" defaultValue={comic.description}
+                                                name="description" onChange={handleEditInputChange} className="form-control"
+                                            />
+                                            <input
+                                                type="text" placeholder="Author" defaultValue={comic.author} name="author"
+                                                onChange={handleEditInputChange} className="form-control"
+                                            />
+                                            <input
+                                                type="text" placeholder="Format" defaultValue={comic.format}  name="format"
+                                                onChange={handleEditInputChange} className="form-control"
+                                            />
+                                            <input
+                                                placeholder="Rating"  type="number" defaultValue={comic.rating} step="0.1"
+                                                min="0.0" max="5.0" name="rating" onChange={handleEditInputChange}
+                                                className="form-control"
+                                            />
+                                            <input
+                                                type="text" placeholder="imgURL"  defaultValue={comic.imgURL}  name="imgURL"
+                                                onChange={handleEditInputChange} className="form-control"
+                                            />
 
-                            </tr>
+                                        <button className="btn btn-outline-primary btn-sm w-auto" type="submit">update</button>
+
+                                    </form></td></tr>
+                                    :
+                                    <tr >
+                                        <td>{comic.id}</td>
+                                        <td>{comic.title}</td>
+                                        <td>{comic.author}</td>
+                                        <td>{comic.rating}</td>
+                                        <td>
+                                            <a type="button" className="btn btn-outline-dark btn-sm"
+                                               onClick={() => EditComic(comic) }>Edit</a>
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+                                            <a type="button" className="btn btn-outline-danger btn-sm"
+                                               onClick={() => deleteItem(comic.id)}>Delete</a>
+                                        </td>
+
+                                    </tr>
+                            }
+
                             </tbody>
-
 
                         </>
                     })
