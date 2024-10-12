@@ -9,7 +9,7 @@ import Navbar from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 import "bootstrap/dist/css/bootstrap.css"
 import "../../singleProduct.css"
-import Favorites from "@/app/_components/Favorites";
+import "../../globals.css"
 import {BlogState} from "@/app/_libs/States/BlogState";
 
 
