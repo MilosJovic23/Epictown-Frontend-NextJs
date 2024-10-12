@@ -16,6 +16,9 @@ import deleteDocument from "@/app/_functions/deleteDocFirestore";
 import useFirestoreCollection from "@/app/_functions/firestoreCollection";
 import editDocument from "@/app/_functions/editDocFirestore";
 
+import {useRecoilState} from "recoil";
+import {UserState} from "@/app/_libs/States/UserState";
+
 
 export default function Dashboard () {
 
@@ -39,7 +42,7 @@ export default function Dashboard () {
 
     const [ addDocError,setAddDocError ] =useState("");
     const [ EditComicId,setEditComicId ] = useState(null)
-
+    const [userState,setUserState]=useRecoilState( UserState );
     const { data: comics, loading } = useFirestoreCollection("comics");
 
     if (loading) {
@@ -125,6 +128,9 @@ export default function Dashboard () {
         setEditComicId(null);
     }
 
+
+
+
     return <>
         <Header/>
         <div className="MainContainer my-4 pt-5">
@@ -133,45 +139,52 @@ export default function Dashboard () {
 
                 <div className="col">
                     <input
-                        type={'text'} placeholder="Title" value={formData.title} name="title" onChange={handleInputChange}  className="form-control" required
+                        type={'text'} placeholder="Title" value={formData.title} name="title"
+                        onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="Description" value={formData.description} name="description" onChange={handleInputChange} className="form-control" required
+                        type="text" placeholder="Description" value={formData.description} name="description"
+                        onChange={handleInputChange} className="form-control" required
                     />
 
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="Author" value={formData.author} name="author" onChange={handleInputChange} className="form-control" required
+                        type="text" placeholder="Author" value={formData.author} name="author"
+                        onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        type="text" placeholder="Format" value={formData.format} name="format" onChange={handleInputChange} className="form-control" required
+                        type="text" placeholder="Format" value={formData.format} name="format"
+                        onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col">
                     <input
-                        placeholder="Rating" value={formData.rating} type="number" step="0.1" min="0.0" max="5.0" name="rating" onChange={handleInputChange} className="form-control" required
+                        placeholder="Rating" value={formData.rating} type="number" step="0.1" min="0.0" max="5.0"
+                        name="rating" onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
                 <div className="col position-relative">
                     <input
-                        type="number" placeholder="Id" value={formData.id} name="id" id="floatingInputInvalid" onChange={handleInputChange}
+                        type="number" placeholder="Id" value={formData.id} name="id" id="floatingInputInvalid"
+                        onChange={handleInputChange}
                         className="form-control" required
                     />
                 </div>
 
                 <div className="col">
-                <input
-                        type="text" placeholder="imgUrl" value={formData.imgURL} name="imgURL" onChange={handleInputChange} className="form-control"
+                    <input
+                        type="text" placeholder="imgUrl" value={formData.imgURL} name="imgURL"
+                        onChange={handleInputChange} className="form-control"
                     />
                 </div>
                 <button className="btn btn-dark w-auto" type="submit">Add</button>
@@ -196,50 +209,62 @@ export default function Dashboard () {
                         return <>
 
 
-
                             <tbody key={index}>
                             {
                                 EditComicId === comic.id ?
-                                    <tr><td colspan="7" rowSpan="3" className="table-active"><form className="d-flex gap-1" onSubmit={ e=>handleEditSubmit(e,comic) }>
+                                    <tr>
+                                        <td colspan="7" rowSpan="3" className="table-active">
+                                            <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic)}>
 
-                                            <input
-                                                type='text' placeholder="Title" defaultValue={comic.title}   name="title"
-                                                onChange={handleEditInputChange} className="form-control"
-                                            />
-                                            <input
-                                                type="text" placeholder="Description" defaultValue={comic.description}
-                                                name="description" onChange={handleEditInputChange} className="form-control"
-                                            />
-                                            <input
-                                                type="text" placeholder="Author" defaultValue={comic.author} name="author"
-                                                onChange={handleEditInputChange} className="form-control"
-                                            />
-                                            <input
-                                                type="text" placeholder="Format" defaultValue={comic.format}  name="format"
-                                                onChange={handleEditInputChange} className="form-control"
-                                            />
-                                            <input
-                                                placeholder="Rating"  type="number" defaultValue={comic.rating} step="0.1"
-                                                min="0.0" max="5.0" name="rating" onChange={handleEditInputChange}
-                                                className="form-control"
-                                            />
-                                            <input
-                                                type="text" placeholder="imgURL"  defaultValue={comic.imgURL}  name="imgURL"
-                                                onChange={handleEditInputChange} className="form-control"
-                                            />
+                                                <input
+                                                    type='text' placeholder="Title" defaultValue={comic.title}
+                                                    name="title"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="Description"
+                                                    defaultValue={comic.description}
+                                                    name="description" onChange={handleEditInputChange}
+                                                    className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="Author" defaultValue={comic.author}
+                                                    name="author"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="Format" defaultValue={comic.format}
+                                                    name="format"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
+                                                <input
+                                                    placeholder="Rating" type="number" defaultValue={comic.rating}
+                                                    step="0.1"
+                                                    min="0.0" max="5.0" name="rating" onChange={handleEditInputChange}
+                                                    className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="imgURL" defaultValue={comic.imgURL}
+                                                    name="imgURL"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
 
-                                        <button className="btn btn-outline-primary btn-sm w-auto" type="submit">update</button>
+                                                <button className="btn btn-outline-primary btn-sm w-auto"
+                                                        type="submit">update
+                                                </button>
 
-                                    </form></td></tr>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     :
-                                    <tr >
+                                    <tr>
                                         <td>{comic.id}</td>
                                         <td>{comic.title}</td>
                                         <td>{comic.author}</td>
                                         <td>{comic.rating}</td>
                                         <td>
                                             <a type="button" className="btn btn-outline-dark btn-sm"
-                                               onClick={() => EditComic(comic) }>Edit</a>
+                                               onClick={() => EditComic(comic)}>Edit</a>
                                         </td>
                                         <td>
 
