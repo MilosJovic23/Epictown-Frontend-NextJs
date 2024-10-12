@@ -1,18 +1,15 @@
 
 "use client"
 
-import { useRecoilState } from "recoil";
-import { ComicsState } from "@/app/_libs/States/ComicsState";
 
 import { useEffect, useState } from "react";
-import Navbar from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 import "bootstrap/dist/css/bootstrap.css"
 import "../../singleProduct.css"
 import Favorites from "@/app/_components/Favorites";
 import Header from "@/app/_components/Header";
 import fetchComics from "@/app/_functions/fetchComics";
-
+import "../../globals.css"
 
 export default function Products ( { params } ){
 
@@ -48,7 +45,7 @@ export default function Products ( { params } ){
             <h1>page doesnt exist</h1>
         </div>
     }
-    ;
+    
 
 
     return <>
