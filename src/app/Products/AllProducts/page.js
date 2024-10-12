@@ -6,7 +6,7 @@ import Favorites from "@/app/_components/Favorites";
 import fetchComics from "@/app/_functions/fetchComics";
 import {useEffect, useState} from "react";
 import Header from "@/app/_components/Header";
-
+import "../../globals.css"
 
 export default function AllProducts() {
 
