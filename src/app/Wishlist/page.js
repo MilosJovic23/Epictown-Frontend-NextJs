@@ -2,13 +2,14 @@
 
 import {useRecoilState} from "recoil";
 import {FavoriteComics} from "@/app/_libs/States/Favorites";
-import {ComicsState} from "@/app/_libs/States/ComicsState";
+import "../globals.css"
 import {useEffect, useState} from "react";
-import Navbar from "@/app/_components/Header";
+
 import Footer from "@/app/_components/Footer";
 import Favorites from "@/app/_components/Favorites";
 import fetchComics from "@/app/_functions/fetchComics";
-
+import "bootstrap/dist/css/bootstrap.css"
+import Header from "@/app/_components/Header";
 
 export default  function Wishlist () {
 
@@ -26,12 +27,10 @@ export default  function Wishlist () {
 
     const filteredFavorites = comics.filter((el)=> favorites.includes(el.id) )
 
-    console.log(filteredFavorites);
-
 
 
     return <>
-        <Navbar/>
+        <Header/>
 
         <div className="MainContainer d-flex flex-wrap  justify-content-center gap-2 py-5 ">
         {
