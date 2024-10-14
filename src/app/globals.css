@@ -110,35 +110,6 @@ a {
     max-width: 1500px;
     margin:0 auto;
 }
-.navBar {
-    background-color: #ffffff;
-    padding: 1.4em 0;
-}
-.navigation ul {
-    margin:0;
-    padding:0;
-}
-.navBar a {
-    font-weight: 500;
-    color: #000000;
-}
-.navBar a:hover {
-    color:red;
-}
-.logo-img {
-    align-self: center;
-}
-.logo-img:hover {
-    opacity: 85%;
-}
-
-
-.secondaryNavItems a:first-child{
-    color:red;
-}
-.secondaryNavItems a:first-child:hover{
-    opacity: 70%;
-}
 
 /*
     css for Favorites component
