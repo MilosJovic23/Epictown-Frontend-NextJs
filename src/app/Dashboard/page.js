@@ -135,16 +135,16 @@ export default function Dashboard () {
         <Header/>
         <div className="MainContainer my-4 pt-5">
             <h4 className="py-2">Add new item to database</h4>
-            <form className="d-flex gap-2" onSubmit={handleSubmit}>
+            <form className="d-flex gap-2 flex-wrap" onSubmit={handleSubmit}>
 
-                <div className="col">
+                <div className="col-12 col-sm-12 col-md">
                     <input
                         type={'text'} placeholder="Title" value={formData.title} name="title"
                         onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
-                <div className="col">
+                <div className="col-12 col-sm-12 col-md">
                     <input
                         type="text" placeholder="Description" value={formData.description} name="description"
                         onChange={handleInputChange} className="form-control" required
@@ -152,28 +152,28 @@ export default function Dashboard () {
 
                 </div>
 
-                <div className="col">
+                <div className="col-12 col-sm-12 col-md">
                     <input
                         type="text" placeholder="Author" value={formData.author} name="author"
                         onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
-                <div className="col">
+                <div className="col-12 col-sm-12 col-md">
                     <input
                         type="text" placeholder="Format" value={formData.format} name="format"
                         onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
-                <div className="col">
+                <div className="col-12 col-sm-12 col-md">
                     <input
                         placeholder="Rating" value={formData.rating} type="number" step="0.1" min="0.0" max="5.0"
                         name="rating" onChange={handleInputChange} className="form-control" required
                     />
                 </div>
 
-                <div className="col position-relative">
+                <div className="col-12 col-sm-12 col-md">
                     <input
                         type="number" placeholder="Id" value={formData.id} name="id" id="floatingInputInvalid"
                         onChange={handleInputChange}
@@ -181,7 +181,7 @@ export default function Dashboard () {
                     />
                 </div>
 
-                <div className="col">
+                <div className="col-12 col-sm-12 col-md">
                     <input
                         type="text" placeholder="imgUrl" value={formData.imgURL} name="imgURL"
                         onChange={handleInputChange} className="form-control"
@@ -192,7 +192,7 @@ export default function Dashboard () {
             </form>
         </div>
 
-        <div className="MainContainer my-5">
+        <div className="MainContainer my-5 table-responsive">
             <table className="table table-hover">
                 <thead>
                 <tr>
@@ -213,7 +213,7 @@ export default function Dashboard () {
                             {
                                 EditComicId === comic.id ?
                                     <tr>
-                                        <td colspan="7" rowSpan="3" className="table-active">
+                                        <td rowSpan="3" className="table-active">
                                             <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic)}>
 
                                                 <input

@@ -27,20 +27,20 @@ const Header =()=>{
     <div className="navBar">
         <div
             className="MainContainer d-column d-lg-flex  justify-content-center justify-content-lg-between flex-lg-row flex-md-column align-items-md-center gap-md-3">
-            <div className="d-flex justify-content-center gap-5 pb-2">
+            <div className="text-center d-sm-flex justify-content-center justify-content-sm-between gap-5 pb-2">
                 <a href="/"><Image width={150} height={20}   src={logo} alt="epictown logo"/></a>
-                <div className="navigation d-flex align-items-center">
-                    <ul className="d-flex gap-4 ">
+                <div className="navigation d-sm-flex align-items-sm-center">
+                    <ul className="d-sm-flex gap-4">
                         <li><a href={`/About`}>about</a></li>
                         <li><a href={`/Blog`}>blog</a></li>
                         <li><a href={`/Contact`}>contact</a></li>
                     </ul>
                 </div>
             </div>
-            <div className="d-flex gap-3 secondaryNavItems justify-content-center">
+            <div className="text-center d-sm-flex gap-sm-3 secondaryNavItems justify-content-center justify-content-sm-between">
                 { userState.isLoggedIn && (
 
-                        <a className="favorites align-self-center d-flex align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>
+                        <a className="favorites align-self-sm-center d-sm-flex pe-2  pe-sm-0 align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>
 
                 )
                 }
