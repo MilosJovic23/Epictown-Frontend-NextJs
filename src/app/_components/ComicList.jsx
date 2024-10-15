@@ -12,8 +12,6 @@ import Favorites from "@/app/_components/Favorites";
 
 const ComicList = ()=> {
 
-    // const [comics, setComics] = useRecoilState( ComicsState );
-
 
     const [ comics, setComics ] = useState([]);
 
@@ -26,7 +24,7 @@ const ComicList = ()=> {
     }, []);
 
 
-    let sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,7);
+    let sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,5);
 
 
     return<>
