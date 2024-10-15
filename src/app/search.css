@@ -80,13 +80,22 @@
 .searchContainer{
     display: flex;
     border-bottom: 1px solid black;
-    /*padding:.5em 0;*/
+    min-width: 20%;
     gap:5px;
+    width: 100%;
+    max-width: 120px;
+}
+.form-field{
+    width: 100%;
+    max-width: 120px;
 }
 .form-field  input{
     outline:none;
     border:none;
     position: relative;
+    width: 100%;
+    max-width: 120px;
+
 }
 .form-field input::placeholder{
     text-align: left;

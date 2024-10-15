@@ -1,7 +1,7 @@
 
 import ComicList from "@/app/_components/ComicList";
 
-
+import "./globals.css"
 import "./Home.css";
 import Header from "@/app/_components/Header";
 import "bootstrap/dist/css/bootstrap.css"
