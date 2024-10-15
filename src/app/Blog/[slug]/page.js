@@ -37,7 +37,7 @@ export default function Blog ({params}){
             <h1>page doesnt exist</h1>
         </div>
     }
-    ;
+
 
 
     return <>
@@ -64,7 +64,7 @@ export default function Blog ({params}){
 
                 )
                 :
-                ("")
+                ""
 
         })}
 
