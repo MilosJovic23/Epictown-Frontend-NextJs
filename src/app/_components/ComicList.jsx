@@ -24,7 +24,7 @@ const ComicList = ()=> {
     }, []);
 
 
-    let sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,5);
+    let sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,7);
 
 
     return<>

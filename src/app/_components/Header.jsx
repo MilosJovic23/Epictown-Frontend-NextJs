@@ -27,7 +27,7 @@ const Header =()=>{
     <div className="navBar">
         <div
             className="MainContainer d-column d-lg-flex  justify-content-center justify-content-lg-between flex-lg-row flex-md-column align-items-md-center gap-md-3">
-            <div className="text-center d-sm-flex justify-content-center justify-content-sm-between gap-5 pb-2">
+            <div className="text-center d-sm-flex justify-content-center justify-content-sm-between gap-5 pb-4 pb-lg-0">
                 <a href="/"><Image width={150} height={20}   src={logo} alt="epictown logo"/></a>
                 <div className="navigation d-sm-flex align-items-sm-center">
                     <ul className="d-sm-flex gap-4">
@@ -37,7 +37,7 @@ const Header =()=>{
                     </ul>
                 </div>
             </div>
-            <div className="text-center d-sm-flex gap-sm-3 secondaryNavItems justify-content-center justify-content-sm-between">
+            <div className="text-center d-sm-flex gap-sm-3 secondaryNavItems justify-content-center">
                 { userState.isLoggedIn && (
 
                         <a className="favorites align-self-sm-center d-sm-flex pe-2  pe-sm-0 align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>
@@ -51,7 +51,7 @@ const Header =()=>{
                 )
                 }
                 <Search/>
-                <div className="vr"></div>
+                <div className="vr d-none d-sm-block"></div>
                 { userState.isLoggedIn ? (
 
                          <a className="align-self-center" href="#" onClick={e => logout(e)}>logout</a>

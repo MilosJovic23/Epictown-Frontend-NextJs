@@ -33,11 +33,11 @@ const Hero = () =>{
 
         },
         tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 1
+            breakpoint: { max: 1024, min: 845 },
+            items: 2
         },
         mobile: {
-            breakpoint: { max: 464, min: 0 },
+            breakpoint: { max: 845, min: 0 },
             items: 1
         }
     };
@@ -45,12 +45,12 @@ const Hero = () =>{
     return<>
 
         <section className="heroSection">
-            <div className="MainContainer d-flex justify-content-between">
-                <div className="hero-col">
+            <div className="MainContainer d-sm-flex justify-content-between">
+                <div className="hero-title-width text-center text-sm-start hero-title">
                     <h1>Graphic novels, comic books and much more</h1>
                     <a id="exploreBtn" href="/Products/AllProducts">explore</a>
                 </div>
-                <div className="hero-col">
+                <div className="carousel-width text-center text-sm-start mt-5 mt-sm-0 align-self-center">
                     <Carousel  responsive={ responsive }>
                         {
                             comics.map( ( comic,index ) => {

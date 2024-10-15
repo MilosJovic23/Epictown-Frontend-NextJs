@@ -4,11 +4,15 @@
     padding: 4em 0;
 }
 
-.hero-col{
+.hero-title-width{
+    width: 50%;
+}
+.carousel-width{
     width:40%;
 }
-.hero-col h1{
-    font-size: 3.5rem;
+
+.hero-title h1{
+    font-size: 4.3rem;
     line-height: 1;
     font-weight: 900;
     margin-bottom: 4rem;
@@ -26,7 +30,7 @@
 .comicCarousel{
     margin-right: 1em;
 }
-.hero-col:last-child{
+.hero-title:last-child{
     align-self: center;
     height: 100%;
 }
@@ -36,4 +40,12 @@
 
     object-fit: cover;
 
+}
+@media (max-width: 575.98px){
+    .carousel-width{
+        width:100%;
+    }
+    .hero-title-width{
+        width: 100%;
+    }
 }

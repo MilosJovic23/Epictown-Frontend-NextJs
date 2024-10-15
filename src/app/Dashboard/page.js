@@ -213,7 +213,7 @@ export default function Dashboard () {
                             {
                                 EditComicId === comic.id ?
                                     <tr>
-                                        <td rowSpan="3" className="table-active">
+                                        <td>
                                             <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic)}>
 
                                                 <input
