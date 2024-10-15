@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '../footer.css'
 import Image from "next/image";
-import logo from '../../../.next/static/media/epictown.svg'
+import logo from '../_images/epictown.svg'
 import { BsFacebook, BsInstagram, BsTwitterX } from "react-icons/bs";
 const Footer = () =>{
 

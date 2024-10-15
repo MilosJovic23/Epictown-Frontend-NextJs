@@ -4,7 +4,7 @@
 import { HiStar } from "react-icons/hi2";
 import Search from "@/app/_components/serachByTitle";
 import Image from 'next/image'
-import logo from '../../../.next/static/media/epictown.svg'
+import logo from '../_images/epictown.svg'
 import "../header.css"
 import 'bootstrap/dist/css/bootstrap.css'
 ;
