@@ -57,7 +57,7 @@ const Hero = () =>{
                                 return <div className="comicCarousel" key={ index }>
                                     <a href={`/Products/${ comic.id }`} target="_blank">
                                         <div className="comicCarouselImg">
-                                            <img src={ comic.imgURL }/>
+                                            <img src={ comic.imgURL } alt={comic.title}/>
                                         </div>
 
 
