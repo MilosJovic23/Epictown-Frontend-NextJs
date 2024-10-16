@@ -38,7 +38,7 @@ const ComicList = ()=> {
 
                         <a href={`/Products/${ comic.id }`} target="_blank">
                             <div className="singleComicImg noSelect">
-                                <img src={ comic.imgURL }/>
+                                <img src={ comic.imgURL } alt={comic.title}/>
                             </div>
                         </a>
                             <div className="comicTitle text-dark noSelect">
