@@ -2,9 +2,6 @@
 "use client"
 
 
-import { useRecoilState } from "recoil";
-import { ComicsState } from "@/app/_libs/States/ComicsState";
-
 import fetchComics from "@/app/_functions/fetchComics";
 import {useEffect, useState} from "react";
 import Favorites from "@/app/_components/Favorites";
