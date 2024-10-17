@@ -7,7 +7,6 @@ import { ComicsState } from "@/app/_libs/States/ComicsState";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import "../search.css"
-import Favorites from "@/app/_components/Favorites";
 import fetchComics from "@/app/_functions/fetchComics";
 
 const Search = ()=>{
