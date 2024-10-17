@@ -4,7 +4,7 @@
 import { HiOutlineStar,HiStar } from "react-icons/hi2";
 import { useRecoilState } from "recoil";
 import { FavoriteComics } from "@/app/_libs/States/Favorites";
-import {UserState} from "@/app/_libs/States/UserState";
+import { UserState } from "@/app/_libs/States/UserState";
 
 
 const Favorites = ( { comicId } ) =>{
