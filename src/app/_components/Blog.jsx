@@ -3,10 +3,10 @@
 
 import "bootstrap/dist/css/bootstrap.css"
 import "../Blog.css"
-import {useEffect} from "react";
-import {useRecoilState} from "recoil";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 
-import {BlogState} from "@/app/_libs/States/BlogState";
+import { BlogState } from "@/app/_libs/States/BlogState";
 import fetchBlogPosts from "@/app/_functions/fetchBlogPosts";
 const Blog = ()=>{
 
