@@ -28,7 +28,6 @@ export default  function Wishlist () {
     const filteredFavorites = comics.filter((el)=> favorites.includes(el.id) )
 
 
-
     return <>
         <Header/>
 
