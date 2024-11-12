@@ -212,8 +212,8 @@ export default function Dashboard () {
                             <tbody key={index}>
                             {
                                 EditComicId === comic.id ?
-                                    <tr>
-                                        <td>
+
+                                        <td colSpan="7">
                                             <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic)}>
 
                                                 <input
@@ -255,7 +255,7 @@ export default function Dashboard () {
 
                                             </form>
                                         </td>
-                                    </tr>
+
                                     :
                                     <tr>
                                         <td>{comic.id}</td>
