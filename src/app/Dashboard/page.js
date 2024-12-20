@@ -65,7 +65,7 @@ export default function Dashboard () {
 
             }
         } catch (error) {
-            console.error('Error adding document: ', error);
+            console.error('there was an error with adding document: ', error);
         }
         setFormData({ title: "" ,
             author: "" ,
