@@ -18,9 +18,10 @@ const Favorites = ( { comicId } ) =>{
 
             const currentFavorites = Array.isArray( prevFavorites ) ? prevFavorites : [];
 
-            return currentFavorites.includes( comicId )
-                ? currentFavorites.filter( ( id ) => id !== comicId )
-                : [...currentFavorites, comicId]
+            return currentFavorites.includes( comicId ) ?
+                currentFavorites.filter( ( id ) => id !== comicId )
+                :
+                [...currentFavorites, comicId]
         });
 
     }
