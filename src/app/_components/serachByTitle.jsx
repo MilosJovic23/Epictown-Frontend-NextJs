@@ -14,38 +14,54 @@ const Search = ()=>{
     const [searchTerm,setSearchTerm]=useState("");
     const [searchResults,setSearchResults]=useState([]);
 
-    const comics = useRecoilValue( ComicsState );
-    const setComics = useSetRecoilState(ComicsState)
-    // const [ comics, setComics ] = useState([]);
+    // const comics = useRecoilValue( ComicsState );
+    // const setComics = useSetRecoilState(ComicsState)
 
-    useEffect(() => {
-        const getComics = async () => {
-            await fetchComics(setComics);
-        };
+    const [data , setData]=useState([]);
 
-        getComics();
-    }, []);
 
     let resultsByTitle=[];
 
-    const search = ()=>{
+    // const search = ()=>{
+    //
+    //     data.forEach( comic =>{
+    //
+    //        if( comic.title.toLowerCase().includes(searchTerm.toLowerCase()) || comic.author.toLowerCase().includes(searchTerm.toLowerCase()) ){
+    //            resultsByTitle.push( comic );
+    //        }
+    //     }
+    //     )
+    //
+    //     setSearchResults(resultsByTitle);
+    // }
 
-        comics.forEach( comic =>{
-
-           if( comic.title.toLowerCase().includes(searchTerm.toLowerCase()) || comic.author.toLowerCase().includes(searchTerm.toLowerCase()) ){
-               resultsByTitle.push( comic );
-           }
+    const handleSearch = async () => {
+        try {
+            const response = await fetch(`localhost/Epictown/restapi/search/api.php?query=${searchTerm}`,{
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify({searchTerm})
+            });
+            if (!response.ok){
+                throw new Error("Failed to fetch results");
+            }
+            const data = await response.json();
+            console.log(data)
+            setData(data);
         }
-        )
 
-        setSearchResults(resultsByTitle);
+        catch(error){
+            console.log(error)
+        }
     }
 
-    useEffect(() => {
-        if (searchTerm === "") {
-            setSearchResults([]);
-        }
-    }, [searchTerm]);
+    // useEffect(() => {
+    //     if (searchTerm === "") {
+    //         setSearchResults([]);
+    //     }
+    // }, [searchTerm]);
 
 
 
@@ -55,7 +71,7 @@ const Search = ()=>{
             <form className="form-field">
                 <div className="searchContainer">
                     <span className="icon"><AiOutlineSearch/></span>
-                    <input placeholder="search comics" onInput={search}
+                    <input placeholder="search comics" onClick={handleSearch}
                            onChange={e => setSearchTerm( e.currentTarget.value )} value={ searchTerm }/>
                 </div>
 
@@ -63,31 +79,31 @@ const Search = ()=>{
         </div>
 
 
-            {
-                searchTerm.length > 0 &&
+            {/*{*/}
+            {/*    searchTerm.length > 0 &&*/}
 
-                <div className="searchResultsStyle">
+            {/*    <div className="searchResultsStyle">*/}
 
-                    { searchResults.map(( comic, index) => {
-                        return <div className="result-item"  key={ index }>
-                                    <div className="resultCard">
-                                        <a href={`/Products/${ comic.id }`} target="_blank">
+            {/*        { data.map(( comic, index) => {*/}
+            {/*            return <div className="result-item"  key={ index }>*/}
+            {/*                        <div className="resultCard">*/}
+            {/*                            <a href={`/Products/${ comic.id }`} target="_blank">*/}
 
-                                            <div className="imgHover">
-                                                <img src={ comic.imgURL }/>
-                                                <div className="text">{ comic.title }</div>
-                                            </div>
+            {/*                                <div className="imgHover">*/}
+            {/*                                    <img src={ comic.imgURL }/>*/}
+            {/*                                    <div className="text">{ comic.title }</div>*/}
+            {/*                                </div>*/}
 
-                                        </a>
+            {/*                            </a>*/}
 
-                                    </div>
-                                </div>
-                    })}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*        })}*/}
 
-                </div>
+            {/*    </div>*/}
 
 
-            }
+            {/*}*/}
 
 
 

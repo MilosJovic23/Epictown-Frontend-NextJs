@@ -3,6 +3,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 
 const useFirestoreCollection = (collectionName) => {
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
