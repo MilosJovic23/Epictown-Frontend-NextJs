@@ -14,26 +14,12 @@ const Search = ()=>{
     const [searchTerm,setSearchTerm]=useState("");
     const [searchResults,setSearchResults]=useState([]);
 
-    // const comics = useRecoilValue( ComicsState );
-    // const setComics = useSetRecoilState(ComicsState)
-
     const [data , setData]=useState([]);
 
 
     let resultsByTitle=[];
 
-    // const search = ()=>{
-    //
-    //     data.forEach( comic =>{
-    //
-    //        if( comic.title.toLowerCase().includes(searchTerm.toLowerCase()) || comic.author.toLowerCase().includes(searchTerm.toLowerCase()) ){
-    //            resultsByTitle.push( comic );
-    //        }
-    //     }
-    //     )
-    //
-    //     setSearchResults(resultsByTitle);
-    // }
+
 
     const handleSearch = async () => {
         try {
@@ -56,12 +42,6 @@ const Search = ()=>{
             console.log(error)
         }
     }
-
-    // useEffect(() => {
-    //     if (searchTerm === "") {
-    //         setSearchResults([]);
-    //     }
-    // }, [searchTerm]);
 
 
 
