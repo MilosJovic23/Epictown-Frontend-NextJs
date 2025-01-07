@@ -1,6 +1,4 @@
 
-import {searchAllProducts} from "../../services/productServices";
-import {query} from "firebase/firestore";
 
 
 export default async function handler (req,res) {
@@ -10,12 +8,12 @@ export default async function handler (req,res) {
     }
 
     try{
-        const response = await fetch(process.env.PRODUCT_API_URL,{
+        const response = await fetch(process.env.SEARCH_API_URL,{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
             },
-            body:JSON.stringify({search:"batman"}),
+            body:JSON.stringify({search:req.query.search}),
         });
 
         const data = await response.json();
