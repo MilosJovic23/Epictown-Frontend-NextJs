@@ -11,8 +11,6 @@ const Search = ()=>{
     const [searchResults,setSearchResults]=useState([]);
 
 
-
-
     useEffect(() => {
         const fetchData = async () => {
             try{
@@ -34,8 +32,6 @@ const Search = ()=>{
         }
     }, [searchTerm]);
 
-
-
     return<>
 
         <div>
@@ -49,12 +45,9 @@ const Search = ()=>{
             </form>
         </div>
 
-
             {
                 searchTerm.length > 0 &&
-
                 <div className="searchResultsStyle">
-
                     {
                         searchResults.map((comic, index) => {
                             return <div className="result-item" key={index}>
@@ -72,12 +65,8 @@ const Search = ()=>{
                             </div>
                         })
                     }
-
                 </div>
-
-
             }
-
 
     </>
 }
