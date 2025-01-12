@@ -14,10 +14,10 @@ export default function Home() {
       <>
 
               <Header/>
-              {/*<Hero/>*/}
-              {/*<ComicList/>*/}
-              {/*<Blog/>*/}
-              {/*<Footer/>*/}
+              <Hero/>
+              <ComicList/>
+              <Blog/>
+              <Footer/>
 
       </>
 
