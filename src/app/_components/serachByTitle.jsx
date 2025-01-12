@@ -22,8 +22,8 @@ const Search = ()=>{
                 setSearchResults( Array.isArray(result.data) ? result.data : [] );
 
             }
-            catch(err){
-                console.error("error fetching data:",err);
+            catch(error){
+                console.error("error fetching data:",error);
             }
         }
         if (searchTerm === "") {
