@@ -1,47 +1,38 @@
 "use client"
 
-
-
-import {useRecoilValue, useSetRecoilState} from "recoil";
-import { ComicsState } from "@/app/_libs/States/ComicsState";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import "../search.css"
-import fetchComics from "@/app/_functions/fetchComics";
+
 
 const Search = ()=>{
 
     const [searchTerm,setSearchTerm]=useState("");
     const [searchResults,setSearchResults]=useState([]);
 
-    const [data , setData]=useState([]);
-
-
-    let resultsByTitle=[];
 
 
 
-    const handleSearch = async () => {
-        try {
-            const response = await fetch(`localhost/Epictown/restapi/search/api.php?query=${searchTerm}`,{
-                method: "POST",
-                headers:{
-                    "Content-Type": "application/json"
-                },
-                body:JSON.stringify({searchTerm})
-            });
-            if (!response.ok){
-                throw new Error("Failed to fetch results");
+    useEffect(() => {
+        const fetchData = async () => {
+            try{
+
+                const response = await fetch("/api/search?search="+searchTerm);
+                const result = await response.json();
+                setSearchResults( Array.isArray(result.data) ? result.data : [] );
+
             }
-            const data = await response.json();
-            console.log(data)
-            setData(data);
+            catch(err){
+                console.error("error fetching data:",err);
+            }
         }
-
-        catch(error){
-            console.log(error)
+        if (searchTerm === "") {
+            setSearchResults([]);
         }
-    }
+        if ( searchTerm ) {
+            fetchData();
+        }
+    }, [searchTerm]);
 
 
 
@@ -51,7 +42,7 @@ const Search = ()=>{
             <form className="form-field">
                 <div className="searchContainer">
                     <span className="icon"><AiOutlineSearch/></span>
-                    <input placeholder="search comics" onClick={handleSearch}
+                    <input placeholder="search comics"
                            onChange={e => setSearchTerm( e.currentTarget.value )} value={ searchTerm }/>
                 </div>
 
@@ -59,32 +50,33 @@ const Search = ()=>{
         </div>
 
 
-            {/*{*/}
-            {/*    searchTerm.length > 0 &&*/}
+            {
+                searchTerm.length > 0 &&
 
-            {/*    <div className="searchResultsStyle">*/}
+                <div className="searchResultsStyle">
 
-            {/*        { data.map(( comic, index) => {*/}
-            {/*            return <div className="result-item"  key={ index }>*/}
-            {/*                        <div className="resultCard">*/}
-            {/*                            <a href={`/Products/${ comic.id }`} target="_blank">*/}
+                    {
+                        searchResults.map((comic, index) => {
+                            return <div className="result-item" key={index}>
+                                <div className="resultCard">
+                                    <a href={`/Products/${comic.id}`} target="_blank">
 
-            {/*                                <div className="imgHover">*/}
-            {/*                                    <img src={ comic.imgURL }/>*/}
-            {/*                                    <div className="text">{ comic.title }</div>*/}
-            {/*                                </div>*/}
+                                        <div className="imgHover">
+                                            <img src={comic.imgURL}/>
+                                            <div className="text">{comic.title}</div>
+                                        </div>
 
-            {/*                            </a>*/}
+                                    </a>
 
-            {/*                        </div>*/}
-            {/*                    </div>*/}
-            {/*        })}*/}
+                                </div>
+                            </div>
+                        })
+                    }
 
-            {/*    </div>*/}
+                </div>
 
 
-            {/*}*/}
-
+            }
 
 
     </>
