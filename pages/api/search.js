@@ -9,9 +9,7 @@ export default async function handler (req,res) {
 
     try {
 
-        const query = req.query;
-
-        const response = await fetch(process.env.SEARCH_API_URL,{
+        const response = await fetch( process.env.SEARCH_API_URL,{
             method: "POST",
             header:{
                 "Content-Type": "application/json",
