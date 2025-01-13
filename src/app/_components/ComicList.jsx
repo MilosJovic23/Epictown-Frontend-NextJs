@@ -2,26 +2,36 @@
 "use client"
 
 
-import fetchComics from "@/app/_functions/fetchComics";
+
 import {useEffect, useState} from "react";
 import Favorites from "@/app/_components/Favorites";
 
 
 const ComicList = ()=> {
 
-
     const [ comics, setComics ] = useState([]);
 
     useEffect(() => {
-        const getComics = async () => {
-            await fetchComics(setComics);
-        };
 
-        getComics();
+        const fetchAll = async () => {
+            try{
+                const response = await fetch( "http://localhost/Epictown/restapi/api.php" );
+                const result = await response.json();
+                console.log( result );
+                setComics(result);
+            }
+            catch (error) {
+                console.error("error fetching comics list", error);
+            }
+        }
+        if( comics ){
+            fetchAll();
+        }
+
     }, []);
 
+    let sortedProducts = comics.sort((a, b) => b.rating - a.rating).slice(0,7);
 
-    let sortedProducts = [...comics].sort((a, b) => b.rating - a.rating).slice(0,7);
 
 
     return<>
