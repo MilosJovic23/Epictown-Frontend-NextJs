@@ -11,11 +11,12 @@ const ComicList = ()=> {
 
     const [ comics, setComics ] = useState([]);
 
+
     useEffect(() => {
 
         const fetchAll = async () => {
             try{
-                const response = await fetch( "http://localhost/Epictown/restapi/api.php" );
+                const response = await fetch( process.env.NEXT_PUBLIC_API_URL );
                 const result = await response.json();
                 console.log( result );
                 setComics(result);
@@ -24,9 +25,8 @@ const ComicList = ()=> {
                 console.error("error fetching comics list", error);
             }
         }
-        if( comics ){
-            fetchAll();
-        }
+
+        fetchAll();
 
     }, []);
 
