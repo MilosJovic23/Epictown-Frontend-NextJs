@@ -1,28 +1,22 @@
 
 "use client"
 
+
 import Footer from "@/app/_components/Footer";
 import Favorites from "@/app/_components/Favorites";
-import fetchComics from "@/app/_functions/fetchComics";
-import {useEffect, useState} from "react";
 import Header from "@/app/_components/Header";
 import "../../globals.css"
+import {useFetch} from "@/app/_hooks/useFetch";
+
 
 export default function AllProducts() {
 
-    const [ comics, setComics ] = useState([]);
+    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
 
-    useEffect(() => {
-        const getComics = async () => {
-            await fetchComics(setComics);
-        };
-
-        getComics();
-    }, []);
-
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
     let sortedProducts = [...comics].sort((a, b) => b.rating - a.rating);
-
 
     return <>
 
@@ -46,7 +40,6 @@ export default function AllProducts() {
                                 <Favorites comicId={ comic.id }/>
                             </div>
 
-
                         </div>
 
 
@@ -54,9 +47,7 @@ export default function AllProducts() {
             </div>
 
         </div>
-
         <Footer/>
-
 
     </>
 

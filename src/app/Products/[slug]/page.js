@@ -2,61 +2,33 @@
 "use client"
 
 
-import { useEffect, useState } from "react";
 import Footer from "@/app/_components/Footer";
 import "bootstrap/dist/css/bootstrap.css"
 import "../../singleProduct.css"
 import Favorites from "@/app/_components/Favorites";
 import Header from "@/app/_components/Header";
-import fetchComics from "@/app/_functions/fetchComics";
 import "../../globals.css"
+import {useFetch} from "@/app/_hooks/useFetch";
 
 export default function Products ( { params } ){
 
-    const [isMounted, setIsMounted] = useState(false);
-    const [ comics, setComics ] = useState([]);
 
+    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
 
-
-
-    useEffect(() => {
-        const getComics = async () => {
-            await fetchComics(setComics);
-        };
-
-        getComics();
-    }, []);
-
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, [comics,setComics]);
-
-    if(!isMounted){
-        return <h5>loading..</h5>
-    }
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
     const { slug } = params;
-    const exists = comics.some( item => item.id === parseInt(slug));
-
-    if(!exists) {
-        return <div>
-            <Header/>
-            <h1>page doesnt exist</h1>
-        </div>
-    }
-    
-
 
     return <>
 
         <Header/>
 
             { comics.map(( comic )=>{
+                console.log(typeof(comic.id))
 
-                return ( comic.id === parseInt( slug ) )?
+                return ( comic.id ===  slug )?
                     (
-
                         <div className="MainContainer productContainer">
                             <div className="singleProductWrapper d-flex justify-content-between " key={ comic.id }>
 
@@ -74,14 +46,12 @@ export default function Products ( { params } ){
 
                                 </div>
 
-
                             </div>
                         </div>
 
                     )
                     :
                     ("")
-
             })}
 
 
