@@ -2,33 +2,17 @@
 "use client"
 
 
-
-import {useEffect, useState} from "react";
 import Favorites from "@/app/_components/Favorites";
+import {useFetch} from "@/app/_hooks/useFetch";
 
 
 const ComicList = ()=> {
 
-    const [ comics, setComics ] = useState([]);
 
+    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
 
-    useEffect(() => {
-
-        const fetchAll = async () => {
-            try{
-                const response = await fetch( process.env.NEXT_PUBLIC_API_URL );
-                const result = await response.json();
-                console.log( result );
-                setComics(result);
-            }
-            catch (error) {
-                console.error("error fetching comics list", error);
-            }
-        }
-
-        fetchAll();
-
-    }, []);
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
     let sortedProducts = comics.sort((a, b) => b.rating - a.rating).slice(0,7);
 
