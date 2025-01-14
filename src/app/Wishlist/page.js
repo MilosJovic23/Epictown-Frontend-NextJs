@@ -3,27 +3,20 @@
 import {useRecoilState} from "recoil";
 import {FavoriteComics} from "@/app/_libs/States/Favorites";
 import "../globals.css"
-import {useEffect, useState} from "react";
-
 import Footer from "@/app/_components/Footer";
 import Favorites from "@/app/_components/Favorites";
-import fetchComics from "@/app/_functions/fetchComics";
 import "bootstrap/dist/css/bootstrap.css"
 import Header from "@/app/_components/Header";
+import {useFetch} from "@/app/_hooks/useFetch";
 
 export default  function Wishlist () {
 
 
     const [favorites,setFavorites] = useRecoilState(FavoriteComics);
-    const [ comics, setComics ] = useState([]);
+    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
 
-    useEffect(() => {
-        const getComics = async () => {
-            await fetchComics(setComics);
-        };
-
-        getComics();
-    }, []);
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
     const filteredFavorites = comics.filter((el)=> favorites.includes(el.id) )
 
