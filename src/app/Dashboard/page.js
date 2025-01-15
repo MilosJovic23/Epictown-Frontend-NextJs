@@ -213,85 +213,81 @@ export default function Dashboard () {
                 </tr>
                 </thead>
                 {
-                    comics.map((comicbook,i) => {
+                    comics.map((comicbook) => {
 
-                        return <>
-
-
-                            <tbody key={comicbook.id-i} >
+                        return (
+                            <>
+                            <tbody key={comicbook.id} >
                             {
                                 EditComicId === comicbook.id ?
-                                    <td key={comicbook.id}>
-                                        <a>test1</a>
-                                    </td>
 
-                                        // <td colSpan="7" >
-                                        //     <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic) } >
-                                        //
-                                        //         <input
-                                        //             type='text' placeholder="Title" defaultValue={comic.title}
-                                        //             name="title"
-                                        //             onChange={handleEditInputChange} className="form-control"
-                                        //         />
-                                        //         <input
-                                        //             type="text" placeholder="Description"
-                                        //             defaultValue={comic.description}
-                                        //             name="description" onChange={handleEditInputChange}
-                                        //             className="form-control"
-                                        //         />
-                                        //         <input
-                                        //             type="text" placeholder="Author" defaultValue={comic.author}
-                                        //             name="author"
-                                        //             onChange={handleEditInputChange} className="form-control"
-                                        //         />
-                                        //         <input
-                                        //             type="text" placeholder="Format" defaultValue={comic.format}
-                                        //             name="format"
-                                        //             onChange={handleEditInputChange} className="form-control"
-                                        //         />
-                                        //         <input
-                                        //             placeholder="Rating" type="number" defaultValue={comic.rating}
-                                        //             step="0.1"
-                                        //             min="0.0" max="5.0" name="rating" onChange={handleEditInputChange}
-                                        //             className="form-control"
-                                        //         />
-                                        //         <input
-                                        //             type="text" placeholder="imgURL" defaultValue={comic.imgURL}
-                                        //             name="imgURL"
-                                        //             onChange={handleEditInputChange} className="form-control"
-                                        //         />
-                                        //
-                                        //         <button className="btn btn-outline-primary btn-sm w-auto"
-                                        //                 type="submit">update
-                                        //         </button>
-                                        //
-                                        //     </form>
-                                        // </td>
+                                        <tr key={`edit-${comicbook.id}`}>
+                                        <td colSpan="7" >
+                                            <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic) } >
 
+                                                <input
+                                                    type='text' placeholder="Title" defaultValue={comicbook.title}
+                                                    name="title"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="Description"
+                                                    defaultValue={comicbook.description}
+                                                    name="description" onChange={handleEditInputChange}
+                                                    className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="Author" defaultValue={comicbook.author}
+                                                    name="author"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="Format" defaultValue={comicbook.format}
+                                                    name="format"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
+                                                <input
+                                                    placeholder="Rating" type="number" defaultValue={comicbook.rating}
+                                                    step="0.1"
+                                                    min="0.0" max="5.0" name="rating" onChange={handleEditInputChange}
+                                                    className="form-control"
+                                                />
+                                                <input
+                                                    type="text" placeholder="imgURL" defaultValue={comicbook.imgURL}
+                                                    name="imgURL"
+                                                    onChange={handleEditInputChange} className="form-control"
+                                                />
+
+                                                <button className="btn btn-outline-primary btn-sm w-auto"
+                                                        type="submit">update
+                                                </button>
+
+                                            </form>
+                                        </td>
+                                        </tr>
                                     :
-                                    <a key={i}>test</a>
 
-                                    // <tr>
-                                    //     <td>{comic.id}</td>
-                                    //     <td>{comic.title}</td>
-                                    //     <td>{comic.author}</td>
-                                    //     <td>{comic.rating}</td>
-                                    //     <td>
-                                    //         <a type="button" className="btn btn-outline-dark btn-sm"
-                                    //            onClick={() => EditComic(comic)}>Edit</a>
-                                    //     </td>
-                                    //
-                                    //     <td>
-                                    //         <a type="button" className="btn btn-outline-danger btn-sm"
-                                    //            onClick={() => deleteItem(comic.id)}>Delete</a>
-                                    //     </td>
-                                    //
-                                    // </tr>
+                                    <tr key={`view-${comicbook.id}`} >
+                                        <td>{comicbook.id}</td>
+                                        <td>{comicbook.title}</td>
+                                        <td>{comicbook.author}</td>
+                                        <td>{comicbook.rating}</td>
+                                        <td>
+                                            <a type="button" className="btn btn-outline-dark btn-sm"
+                                               onClick={() => EditComic(comicbook)}>Edit</a>
+                                        </td>
+
+                                        <td>
+                                            <a type="button" className="btn btn-outline-danger btn-sm"
+                                               onClick={() => deleteItem(comicbook.id)}>Delete</a>
+                                        </td>
+
+                                    </tr>
                             }
 
                             </tbody>
                         </>
-
+                        )
                     }
 
                     )
