@@ -16,7 +16,6 @@ export default function Login ({params}){
     const { register, handleSubmit, formState: { errors } } = useForm();
     const router = useRouter();
 
-
     const [userState,setUserState]= useRecoilState(UserState);
 
 
