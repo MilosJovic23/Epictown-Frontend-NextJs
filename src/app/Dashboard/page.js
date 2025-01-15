@@ -1,3 +1,4 @@
+
 "use client"
 
 
@@ -18,15 +19,18 @@ import editDocument from "@/app/_functions/editDocFirestore";
 
 import {useRecoilState} from "recoil";
 import {UserState} from "@/app/_libs/States/UserState";
-
+import {useFetch} from "@/app/_hooks/useFetch";
 
 export default function Dashboard () {
+
+
 
     const [ formData, setFormData ] = useState({
         title: "" ,
         author: "" ,
         description: "" ,
         id: "" ,
+        format:"",
         imgURL: "" ,
         rating: ""
     });
@@ -36,44 +40,58 @@ export default function Dashboard () {
         author: "" ,
         description: "" ,
         id: "" ,
+        format:"",
         imgURL: "" ,
         rating: ""
     });
 
-    const [ addDocError,setAddDocError ] =useState("");
-    const [ EditComicId,setEditComicId ] = useState(null)
-    const [userState,setUserState]=useRecoilState( UserState );
-    const { data: comics, loading } = useFirestoreCollection("comics");
+    
+    const [ EditComicId,setEditComicId ] = useState(null);
+    const [ loadingAddNew ,setLoadingAddNew ] = useState(false);
+    const [ message ,setMessage ] = useState("");
+    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
 
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
-        try {
-            const q = query(collection(db, 'comics'), where('id', '==', formData.id));
-            const querySnapshot = await getDocs(q);
 
-            if (!querySnapshot.empty) {
-                setAddDocError('Comic with the same id already exists!');
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
+                method: "POST",
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify( {"description":"asdasd"})
 
-            } else {
-                const docRef = await addDoc(collection(db, 'comics'), formData);
-                console.log('Document written with ID: ', docRef.id);
+            })
+            const result = await response.json();
 
+            if (!result.ok) {
+                throw new Error( result.error || 'Failed to add comic book');
             }
-        } catch (error) {
-            console.error('there was an error with adding document: ', error);
+            setMessage(result.message || 'Comic book added successfully!');
         }
-        setFormData({ title: "" ,
-            author: "" ,
-            description: "" ,
-            id: "" ,
-            imgURL: "" ,
-            rating: ""})
+        catch(error){
+            console.error("there was an error trying to create new comic", error);
+            setMessage( error || "Failed to add comic book" );
+        }
+        finally {
+            setLoadingAddNew(false);
+        }
+
+       // napraviti poziv ka POST api-ju za kreiranje novog stripa 
+        
+        // setFormData({ title: "" ,
+        //     author: "" ,
+        //     description: "" ,
+        //     id: "" ,
+        //     imgURL: "" ,
+        //     rating: ""})
     };
 
 
@@ -102,29 +120,18 @@ export default function Dashboard () {
 
     const deleteItem = async (comicId) =>{
 
-        const q = query(collection(db, "comics"), where("id", "==", comicId ));
-        const querySnapshot = await getDocs(q);
-
-        querySnapshot.forEach((doc) => {
-            deleteDocument("comics",doc.id)
-        });
+        // napraviti poziv ka api-ju za brisanje podataka iz baze preko id-a
 
     }
-    const EditComic = (comic)=>{
-        setEditComicId(comic.id);
-        setEditFormData(comic);
-        console.log(EditFormData,EditComicId)
+    const EditComic = (comicbook)=>{
+        setEditComicId(comicbook.id);
+        setEditFormData(comicbook);
+       
     }
-    const handleEditSubmit = async (e,comic) => {
+    const handleEditSubmit = async (e,comicbook) => {
         e.preventDefault();
-
-
-        const q = query(collection(db, "comics"), where("id", "==", EditComicId ));
-        const querySnapshot = await getDocs(q);
-
-        querySnapshot.forEach( (doc)  => {
-            editDocument("comics",doc.id,EditFormData)
-        });
+        
+       // napraviti poziv ka api-ju za updateovanje podataka stripa
 
         setEditComicId(null);
     }
@@ -188,8 +195,8 @@ export default function Dashboard () {
                         onChange={handleInputChange} className="form-control"
                     />
                 </div>
-                <button className="btn btn-dark w-auto" type="submit">Add</button>
-
+                <button className="btn btn-dark w-auto" type="submit">add</button>
+                {/*{message && <p>{message}</p>}*/}
             </form>
         </div>
 
@@ -206,82 +213,88 @@ export default function Dashboard () {
                 </tr>
                 </thead>
                 {
-                    comics.map((comic, index) => {
+                    comics.map((comicbook,i) => {
+
                         return <>
 
 
-                            <tbody key={index}>
+                            <tbody key={comicbook.id-i} >
                             {
-                                EditComicId === comic.id ?
+                                EditComicId === comicbook.id ?
+                                    <td key={comicbook.id}>
+                                        <a>test1</a>
+                                    </td>
 
-                                        <td colSpan="7">
-                                            <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic)}>
-
-                                                <input
-                                                    type='text' placeholder="Title" defaultValue={comic.title}
-                                                    name="title"
-                                                    onChange={handleEditInputChange} className="form-control"
-                                                />
-                                                <input
-                                                    type="text" placeholder="Description"
-                                                    defaultValue={comic.description}
-                                                    name="description" onChange={handleEditInputChange}
-                                                    className="form-control"
-                                                />
-                                                <input
-                                                    type="text" placeholder="Author" defaultValue={comic.author}
-                                                    name="author"
-                                                    onChange={handleEditInputChange} className="form-control"
-                                                />
-                                                <input
-                                                    type="text" placeholder="Format" defaultValue={comic.format}
-                                                    name="format"
-                                                    onChange={handleEditInputChange} className="form-control"
-                                                />
-                                                <input
-                                                    placeholder="Rating" type="number" defaultValue={comic.rating}
-                                                    step="0.1"
-                                                    min="0.0" max="5.0" name="rating" onChange={handleEditInputChange}
-                                                    className="form-control"
-                                                />
-                                                <input
-                                                    type="text" placeholder="imgURL" defaultValue={comic.imgURL}
-                                                    name="imgURL"
-                                                    onChange={handleEditInputChange} className="form-control"
-                                                />
-
-                                                <button className="btn btn-outline-primary btn-sm w-auto"
-                                                        type="submit">update
-                                                </button>
-
-                                            </form>
-                                        </td>
+                                        // <td colSpan="7" >
+                                        //     <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic) } >
+                                        //
+                                        //         <input
+                                        //             type='text' placeholder="Title" defaultValue={comic.title}
+                                        //             name="title"
+                                        //             onChange={handleEditInputChange} className="form-control"
+                                        //         />
+                                        //         <input
+                                        //             type="text" placeholder="Description"
+                                        //             defaultValue={comic.description}
+                                        //             name="description" onChange={handleEditInputChange}
+                                        //             className="form-control"
+                                        //         />
+                                        //         <input
+                                        //             type="text" placeholder="Author" defaultValue={comic.author}
+                                        //             name="author"
+                                        //             onChange={handleEditInputChange} className="form-control"
+                                        //         />
+                                        //         <input
+                                        //             type="text" placeholder="Format" defaultValue={comic.format}
+                                        //             name="format"
+                                        //             onChange={handleEditInputChange} className="form-control"
+                                        //         />
+                                        //         <input
+                                        //             placeholder="Rating" type="number" defaultValue={comic.rating}
+                                        //             step="0.1"
+                                        //             min="0.0" max="5.0" name="rating" onChange={handleEditInputChange}
+                                        //             className="form-control"
+                                        //         />
+                                        //         <input
+                                        //             type="text" placeholder="imgURL" defaultValue={comic.imgURL}
+                                        //             name="imgURL"
+                                        //             onChange={handleEditInputChange} className="form-control"
+                                        //         />
+                                        //
+                                        //         <button className="btn btn-outline-primary btn-sm w-auto"
+                                        //                 type="submit">update
+                                        //         </button>
+                                        //
+                                        //     </form>
+                                        // </td>
 
                                     :
-                                    <tr>
-                                        <td>{comic.id}</td>
-                                        <td>{comic.title}</td>
-                                        <td>{comic.author}</td>
-                                        <td>{comic.rating}</td>
-                                        <td>
-                                            <a type="button" className="btn btn-outline-dark btn-sm"
-                                               onClick={() => EditComic(comic)}>Edit</a>
-                                        </td>
-                                        <td>
+                                    <a key={i}>test</a>
 
-                                        </td>
-                                        <td>
-                                            <a type="button" className="btn btn-outline-danger btn-sm"
-                                               onClick={() => deleteItem(comic.id)}>Delete</a>
-                                        </td>
-
-                                    </tr>
+                                    // <tr>
+                                    //     <td>{comic.id}</td>
+                                    //     <td>{comic.title}</td>
+                                    //     <td>{comic.author}</td>
+                                    //     <td>{comic.rating}</td>
+                                    //     <td>
+                                    //         <a type="button" className="btn btn-outline-dark btn-sm"
+                                    //            onClick={() => EditComic(comic)}>Edit</a>
+                                    //     </td>
+                                    //
+                                    //     <td>
+                                    //         <a type="button" className="btn btn-outline-danger btn-sm"
+                                    //            onClick={() => deleteItem(comic.id)}>Delete</a>
+                                    //     </td>
+                                    //
+                                    // </tr>
                             }
 
                             </tbody>
-
                         </>
-                    })
+
+                    }
+
+                    )
                 }
             </table>
         </div>
