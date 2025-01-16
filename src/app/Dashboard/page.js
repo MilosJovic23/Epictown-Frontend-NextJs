@@ -66,15 +66,19 @@ export default function Dashboard () {
                 headers:{
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify( {"description":"asdasd"})
+                body: JSON.stringify( {
+                    title: formData.title,
+                    author: formData.author,
+                    description: formData.description,
+                    format: formData.format,
+                    imgURL: formData.imgURL,
+                    rating: formData.rating,
+                })
 
             })
             const result = await response.json();
+            console.log(result);
 
-            if (!result.ok) {
-                throw new Error( result.error || 'Failed to add comic book');
-            }
-            setMessage(result.message || 'Comic book added successfully!');
         }
         catch(error){
             console.error("there was an error trying to create new comic", error);
@@ -83,15 +87,15 @@ export default function Dashboard () {
         finally {
             setLoadingAddNew(false);
         }
+        setFormData({
+            title: "" ,
+            author: "" ,
+            description: "" ,
+            id: "" ,
+            imgURL: "" ,
+            rating: ""
+        })
 
-       // napraviti poziv ka POST api-ju za kreiranje novog stripa 
-        
-        // setFormData({ title: "" ,
-        //     author: "" ,
-        //     description: "" ,
-        //     id: "" ,
-        //     imgURL: "" ,
-        //     rating: ""})
     };
 
 
@@ -195,9 +199,10 @@ export default function Dashboard () {
                         onChange={handleInputChange} className="form-control"
                     />
                 </div>
-                <button className="btn btn-dark w-auto" type="submit">add</button>
-                {/*{message && <p>{message}</p>}*/}
+                <button className="btn btn-dark w-auto" type="submit">{ loadingAddNew? "Loading...": "Add"}</button>
+
             </form>
+            {message && <p>{message}</p>}
         </div>
 
         <div className="MainContainer my-5 table-responsive">
