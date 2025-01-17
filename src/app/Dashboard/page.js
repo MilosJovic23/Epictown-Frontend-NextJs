@@ -23,7 +23,11 @@ import {useFetch} from "@/app/_hooks/useFetch";
 
 export default function Dashboard () {
 
-
+    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
+    const [ EditComicId,setEditComicId ] = useState(null);
+    const [ loadingAddNew ,setLoadingAddNew ] = useState(false);
+    const [ message ,setMessage ] = useState(null);
+    const [ updatedComic,setUpdatedComic ] = useState(comics);
 
     const [ formData, setFormData ] = useState({
         title: "" ,
@@ -34,7 +38,6 @@ export default function Dashboard () {
         imgURL: "" ,
         rating: ""
     });
-
     const [ EditFormData, setEditFormData ] = useState({
         title: "" ,
         author: "" ,
@@ -45,20 +48,16 @@ export default function Dashboard () {
         rating: ""
     });
 
-    
-    const [ EditComicId,setEditComicId ] = useState(null);
-    const [ loadingAddNew ,setLoadingAddNew ] = useState(false);
-    const [ message ,setMessage ] = useState(null);
-    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
-    const [ updateComic,setUpdateComic ] = useState(null);
-
     if ( loading ) return <p>Loading...</p>
     if ( error ) return <p>Error: {error}</p>;
 
-    useEffect(() => {
-        setUpdateComic(comics);
-    }, [comics]);
 
+    useEffect(() => {
+
+        if (comics) setUpdatedComic(comics);
+
+    }, [comics]);
+    console.log(comics,updatedComic);
     const handleSubmit = async (e) => {
 
         e.preventDefault();
@@ -125,7 +124,25 @@ export default function Dashboard () {
         }));
     }
 
-    const deleteItem = async (comicId) =>{
+    const deleteItem = async (comicbookId) =>{
+
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({"id":comicbookId})
+            })
+
+        }
+        catch(error){
+            console.error("there was an error trying to delete item", error);
+        }
+        finally {
+            setUpdatedComic((prevData)=> prevData.filter( comic=>comic.id !== comicbookId ) );
+            console.log("deleted comic", comicbookId);
+        }
 
         // napraviti poziv ka api-ju za brisanje podataka iz baze preko id-a
 
