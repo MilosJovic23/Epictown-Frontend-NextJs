@@ -6,7 +6,7 @@ import Header from "@/app/_components/Header";
 import "../dashboard.css"
 import "bootstrap/dist/css/bootstrap.css"
 
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 
 
@@ -48,13 +48,16 @@ export default function Dashboard () {
     
     const [ EditComicId,setEditComicId ] = useState(null);
     const [ loadingAddNew ,setLoadingAddNew ] = useState(false);
-    const [ message ,setMessage ] = useState("");
+    const [ message ,setMessage ] = useState(null);
     const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
+    const [ updateComic,setUpdateComic ] = useState(null);
 
     if ( loading ) return <p>Loading...</p>
     if ( error ) return <p>Error: {error}</p>;
 
-
+    useEffect(() => {
+        setUpdateComic(comics);
+    }, [comics]);
 
     const handleSubmit = async (e) => {
 
@@ -77,7 +80,7 @@ export default function Dashboard () {
 
             })
             const result = await response.json();
-            console.log(result);
+            setMessage(result.message);
 
         }
         catch(error){
