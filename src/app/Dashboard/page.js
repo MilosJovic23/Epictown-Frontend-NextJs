@@ -46,7 +46,6 @@ export default function Dashboard () {
         rating: ""
     });
 
-
     if ( loading ) return <p>Loading...</p>
     if ( error ) return <p>Error: {error}</p>;
 
@@ -133,10 +132,8 @@ export default function Dashboard () {
             console.error("there was an error trying to delete item", error);
         }
         finally {
-            comics((prevData)=> prevData.filter( comicbook => comicbook.id !== comicbookId ) );
+            refetch();
         }
-
-        // napraviti poziv ka api-ju za brisanje podataka iz baze preko id-a
 
     }
     const EditComic = (comicbook)=>{
