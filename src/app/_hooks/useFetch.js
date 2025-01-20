@@ -35,7 +35,7 @@ export const useFetch = (url) => {
             }
         fetchData();
 
-    },[url,refetch]);
+    },[url,trigger]);
 
     return { data, error, loading,refetch};
 
