@@ -7,18 +7,14 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import fetchComics from "@/app/_functions/fetchComics";
 import {useEffect, useState} from "react";
+import {useFetch} from "@/app/_hooks/useFetch";
 
 const Hero = () =>{
 
-    const [ comics, setComics ] = useState([]);
+    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
 
-    useEffect(() => {
-        const getComics = async () => {
-            await fetchComics(setComics);
-        };
-
-        getComics();
-    }, []);
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
     const responsive = {
         superLargeDesktop: {
