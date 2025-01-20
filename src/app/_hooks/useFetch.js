@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 
 
@@ -7,7 +7,11 @@ export const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [trigger, setTrigger] = useState(0);
 
+    const refetch =()=>{
+        setTrigger(prev=> prev+1);
+    }
     useEffect(() => {
 
             const fetchData = async () => {
@@ -31,8 +35,8 @@ export const useFetch = (url) => {
             }
         fetchData();
 
-    },[url])
+    },[url,refetch]);
 
-    return {data, error, loading};
+    return { data, error, loading,refetch};
 
 }
