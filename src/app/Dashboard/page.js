@@ -23,12 +23,10 @@ import {useFetch} from "@/app/_hooks/useFetch";
 
 export default function Dashboard () {
 
-    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
+    const { data:comics,error,loading,refetch} = useFetch(process.env.NEXT_PUBLIC_API_URL);
     const [ EditComicId,setEditComicId ] = useState(null);
     const [ loadingAddNew ,setLoadingAddNew ] = useState(false);
     const [ message ,setMessage ] = useState(null);
-    const [ updatedComic,setUpdatedComic ] = useState(comics);
-
     const [ formData, setFormData ] = useState({
         title: "" ,
         author: "" ,
@@ -48,20 +46,13 @@ export default function Dashboard () {
         rating: ""
     });
 
+
     if ( loading ) return <p>Loading...</p>
     if ( error ) return <p>Error: {error}</p>;
 
-
-    useEffect(() => {
-
-        if (comics) setUpdatedComic(comics);
-
-    }, [comics]);
-    console.log(comics,updatedComic);
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-
         try{
             const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
                 method: "POST",
@@ -88,6 +79,7 @@ export default function Dashboard () {
         }
         finally {
             setLoadingAddNew(false);
+            refetch();
         }
         setFormData({
             title: "" ,
@@ -103,8 +95,8 @@ export default function Dashboard () {
 
 
     const handleInputChange =  (e)=>{
-        const { name, value } = e.target;
 
+        const { name, value } = e.target;
         const newValue =  (name === 'rating' || name === "id") ? Number(value) : value;
 
         setFormData((prevData)=>({
@@ -114,14 +106,15 @@ export default function Dashboard () {
     }
 
     const handleEditInputChange =  (e)=>{
-        const { name, value } = e.target;
 
+        const { name, value } = e.target;
         const newValue =  (name === 'rating' || name === "id") ? Number(value) : value
 
         setEditFormData((prevData)=>({
             ...prevData,
             [name]:newValue
         }));
+
     }
 
     const deleteItem = async (comicbookId) =>{
@@ -140,8 +133,7 @@ export default function Dashboard () {
             console.error("there was an error trying to delete item", error);
         }
         finally {
-            setUpdatedComic((prevData)=> prevData.filter( comic=>comic.id !== comicbookId ) );
-            console.log("deleted comic", comicbookId);
+            comics((prevData)=> prevData.filter( comicbook => comicbook.id !== comicbookId ) );
         }
 
         // napraviti poziv ka api-ju za brisanje podataka iz baze preko id-a
