@@ -139,12 +139,35 @@ export default function Dashboard () {
     const EditComic = (comicbook)=>{
         setEditComicId(comicbook.id);
         setEditFormData(comicbook);
-       
     }
     const handleEditSubmit = async (e,comicbook) => {
+
         e.preventDefault();
-        
-       // napraviti poziv ka api-ju za updateovanje podataka stripa
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "id":comicbook.id,
+                    "title":EditFormData.title,
+                    "author":EditFormData.author,
+                    "description":EditFormData.description,
+                    "rating":EditFormData.rating,
+                    "format":EditFormData.format,
+                    "imgURL":EditFormData.imgURL,
+                })
+            })
+            const result = await response.json();
+            console.log(result.message);
+        }
+        catch(error){
+            console.error("there was an error trying to delete item", error);
+        }
+        finally {
+            refetch();
+        }
 
         setEditComicId(null);
     }
@@ -237,7 +260,7 @@ export default function Dashboard () {
 
                                         <tr key={`edit-${comicbook.id}`}>
                                         <td colSpan="7" >
-                                            <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comic) } >
+                                            <form className="d-flex gap-1" onSubmit={e => handleEditSubmit(e, comicbook) } >
 
                                                 <input
                                                     type='text' placeholder="Title" defaultValue={comicbook.title}
