@@ -5,8 +5,6 @@ import "../Hero.css"
 import 'bootstrap/dist/css/bootstrap.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import fetchComics from "@/app/_functions/fetchComics";
-import {useEffect, useState} from "react";
 import {useFetch} from "@/app/_hooks/useFetch";
 
 const Hero = () =>{

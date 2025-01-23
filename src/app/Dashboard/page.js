@@ -5,20 +5,8 @@
 import Header from "@/app/_components/Header";
 import "../dashboard.css"
 import "bootstrap/dist/css/bootstrap.css"
-
-import {useEffect, useState} from "react";
-
-
-
-import {collection, addDoc, query, getDocs,where } from "firebase/firestore";
-import {db} from "@/app/firebase";
+import { useState} from "react";
 import Footer from "@/app/_components/Footer";
-import deleteDocument from "@/app/_functions/deleteDocFirestore";
-import useFirestoreCollection from "@/app/_functions/firestoreCollection";
-import editDocument from "@/app/_functions/editDocFirestore";
-
-import {useRecoilState} from "recoil";
-import {UserState} from "@/app/_libs/States/UserState";
 import {useFetch} from "@/app/_hooks/useFetch";
 
 export default function Dashboard () {
@@ -171,11 +159,7 @@ export default function Dashboard () {
 
         setEditComicId(null);
     }
-
-
-
-
-    return <>
+        return <>
         <Header/>
         <div className="MainContainer my-4 pt-5">
             <h4 className="py-2">Add new item to database</h4>
@@ -241,12 +225,10 @@ export default function Dashboard () {
             <table className="table table-hover">
                 <thead>
                 <tr>
-
                     <th>id</th>
                     <th>title</th>
                     <th>author</th>
                     <th>rating</th>
-
                 </tr>
                 </thead>
                 {
