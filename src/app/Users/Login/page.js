@@ -10,30 +10,52 @@ import {useForm} from "react-hook-form";
 import {useRecoilState} from "recoil";
 import {UserState} from "@/app/_libs/States/UserState";
 import users from "@/app/users.JSON"
+import {useState} from "react";
 
 export default function Login ({params}){
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const router = useRouter();
-
     const [userState,setUserState]= useRecoilState(UserState);
+    const [message, setMessage] = useState("");
 
 
-    const onSubmit = (data) => {
 
-        users.forEach((user)=>{
-            if (data.username === user.email || data.password === user.password){
-                setUserState({"isLoggedIn":true,"type":user.type});
+    const onSubmit = async (data) => {
+
+
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_LOGIN_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "username": data.username,
+                    "password": data.password,
+                })
+            });
+
+            if (response.ok){
+                const data = await response.json();
+                data.username === "admin@admin.com" ?
+                    setUserState({"isLoggedIn": true,"type":"admin"})
+                    :
+                    setUserState({"isLoggedIn":true})
                 router.push('/');
-            } else{console.log("wrong credentials") }
-        })
-
-
+            } else {
+                const errorData = await response.json();
+                setMessage(`Login failed: ${errorData.message}`);
+            }
+        }
+        catch(error){
+            console.error("Error during login:", error);
+            setMessage("An error occurred. Please try again.");
+        }
     };
 
 
     return <>
-
 
         <Header/>
 
@@ -49,6 +71,7 @@ export default function Login ({params}){
                         className="input"
                     />
                     {errors.email && <p>{errors.email.message}</p>}
+                    { message && (<p>{message}</p>)}
                 </div>
 
                 <div className="formGroup">
