@@ -24,8 +24,8 @@ a {
     margin: 0 auto;
     padding: 15em 0;
 }
-.loginContainer{
-    height: calc(100% - (70px + 266px));
+.MainContainer{
+    height: 60%;
 }
 
 .formGroup {
