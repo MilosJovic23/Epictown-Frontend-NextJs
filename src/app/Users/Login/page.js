@@ -9,10 +9,10 @@ import "../../login.css"
 import {useForm} from "react-hook-form";
 import {useRecoilState} from "recoil";
 import {UserState} from "@/app/_libs/States/UserState";
-import users from "@/app/users.JSON"
 import {useState} from "react";
 
-export default function Login ({params}){
+
+export default function Login (){
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const router = useRouter();
@@ -20,9 +20,7 @@ export default function Login ({params}){
     const [message, setMessage] = useState("");
 
 
-
     const onSubmit = async (data) => {
-
 
         try{
             const response = await fetch(process.env.NEXT_PUBLIC_LOGIN_URL, {
@@ -31,14 +29,14 @@ export default function Login ({params}){
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    "username": data.username,
+                    "username": data.email,
                     "password": data.password,
                 })
             });
 
-            if (response.ok){
-                const data = await response.json();
-                data.username === "admin@admin.com" ?
+            if (response.ok) {
+                const result = await response.json();
+                data.email === "admin@admin.com" ?
                     setUserState({"isLoggedIn": true,"type":"admin"})
                     :
                     setUserState({"isLoggedIn":true})
@@ -59,7 +57,7 @@ export default function Login ({params}){
 
         <Header/>
 
-        <div className="MainContainer loginContainer d-flex align-items-center" >
+        <div className="MainContainer d-flex align-items-center" >
             <form onSubmit={handleSubmit(onSubmit)} className="form">
 
 
