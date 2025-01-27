@@ -17,12 +17,12 @@ export default function Login (){
     const {
         register:registerForm1,
         handleSubmit:handleSubmit1,
-        formState: { errors1 }
+        formState: { errors:errors1 }
     } = useForm();
     const {
         register:registerForm2,
         handleSubmit:handleSubmit2,
-        formState: { errors2 }
+        formState: { errors:errors2 }
     } = useForm();
     const router = useRouter();
     const [userState,setUserState]= useRecoilState(UserState);
@@ -63,68 +63,94 @@ export default function Login (){
 
     const onSubmit2 = async (data) => {
 
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_REGISTER_URL, {
+
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "username": data.email,
+                    "password": data.password,
+                })
+            })
+
+            const result = await response.json();
+            if ( !result ) setMessageForm2(result.message);
+            else setMessageForm2(result.message);
+
+        }
+        catch(error){
+            console.error("Error during login:", error);
+            setMessageForm2("An error occurred. Please try again.");
+        }
+
     }
+
 
     return <>
 
         <Header/>
 
-        <div className="MainContainer d-flex align-items-center">
-            <form onSubmit={handleSubmit1(onSubmit1)} className="form">
+        <div className="MainContainer d-flex align-items-center flex-column">
 
+            <div className="w-50 h-50">
+                <form onSubmit={handleSubmit1(onSubmit1)} className="form">
 
-                <div className="formGroup">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        {...registerForm1('email', {required: 'Email is required'})}
-                        className="input"
-                    />
-                    {errors1.email && <p>{errors1.email.message}</p>}
-                    {messageForm1 && (<p>{messageForm1}</p>)}
-                </div>
+                    <div className="formGroup">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            {...registerForm1('email', {required: 'Email is required'})}
+                            className="input"
+                        />
+                        {errors1.email && <p>{errors1.email.message}</p>}
+                        {messageForm1 && (<p>{messageForm1}</p>)}
+                    </div>
 
-                <div className="formGroup">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        {...registerForm1('password', {required: 'Password is required'})}
-                        className="input"
-                    />
-                    {errors1.password && <p>{errors1.password.message}</p>}
-                </div>
+                    <div className="formGroup">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            {...registerForm1('password', {required: 'Password is required'})}
+                            className="input"
+                        />
+                        {errors1.password && <p>{errors1.password.message}</p>}
+                    </div>
+                    <button type="submit" className="button">Login</button>
+                </form>
 
-                <button type="submit" className="button">Login</button>
+            </div>
 
-            </form>
+            <div className="w-50">
+                <form onSubmit={handleSubmit2(onSubmit2)} className="form">
 
-            <form onSubmit={handleSubmit2(onSubmit2)} className="form">
-                <p>register here</p>
+                    <div className="formGroup">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            {...registerForm2('email', {required: 'Email is required'})}
+                            className="input"
+                        />
+                        {errors2.email && <p>{errors2.email.message}</p>}
+                        {messageForm2 && (<p>{messageForm2}</p>)}
+                    </div>
 
-                <div className="formGroup">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        {...registerForm2('email', {required: 'Email is required'})}
-                        className="input"
-                    />
-                    {errors2.email && <p>{errors2.email.message}</p>}
-                    {messageForm2 && (<p>{messageForm2}</p>)}
-                </div>
+                    <div className="formGroup">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            {...registerForm2('password', {required: 'Password is required'})}
+                            className="input"
+                        />
+                        {errors2.password && <p>{errors2.password.message}</p>}
+                    </div>
 
-                <div className="formGroup">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        {...registerForm2('password', {required: 'Password is required'})}
-                        className="input"
-                    />
-                    {errors2.password && <p>{errors2.password.message}</p>}
-                </div>
+                    <button type="submit" className="button2">Register</button>
 
-                <button type="submit" className="button">Login</button>
-
-            </form>
+                </form>
+            </div>
         </div>
         <Footer/>
     </>
