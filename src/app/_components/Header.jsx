@@ -38,31 +38,24 @@ const Header =()=>{
                 </div>
             </div>
             <div className="text-center d-sm-flex gap-sm-3 secondaryNavItems justify-content-center">
-                { userState.isLoggedIn && (
-
-                        <a className="favorites align-self-sm-center d-sm-flex pe-2  pe-sm-0 align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>
-
-                )
+                {
+                userState.isLoggedIn &&
+                    <a className="favorites align-self-sm-center d-sm-flex pe-2  pe-sm-0 align-items-center" href={`/Wishlist`}><HiStar style={{fontSize: '1.1rem', color: 'red'}}/>wishlist</a>
                 }
-                {(userState.type === 'admin') && (
 
-                        <a className="dashboard align-self-center" href={`/Dashboard`}>dashboard</a>
-
-                )
+                {
+                (userState.type === 'admin') &&
+                    <a className="dashboard align-self-center" href={`/Dashboard`}>dashboard</a>
                 }
+
                 <Search/>
                 <div className="vr d-none d-sm-block"></div>
-                { userState.isLoggedIn ? (
-
-                         <a className="align-self-center" href="#" onClick={e => logout(e)}>logout</a>
-
-
-                ) : (
-
-                         <a className="align-self-center" href={`/Users/Login`}>login</a>
-
-
-                )}
+                {
+                userState.isLoggedIn ?
+                <a className="align-self-center" href="#" onClick={e => logout(e)}>Logout</a>
+                :
+                <a className="align-self-center" href={`/Users/Login`}>Login/Register</a>
+                }
 
             </div>
         </div>
