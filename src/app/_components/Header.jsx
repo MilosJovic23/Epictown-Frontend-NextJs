@@ -6,21 +6,18 @@ import Search from "@/app/_components/serachByTitle";
 import Image from 'next/image'
 import logo from '../_images/epictown.svg'
 import "../header.css"
-import 'bootstrap/dist/css/bootstrap.css'
-;
+import 'bootstrap/dist/css/bootstrap.css';
 import { useRecoilState } from "recoil";
 import { UserState } from "@/app/_libs/States/UserState";
 const Header =()=>{
 
-
     const [userState,setUserState]=useRecoilState( UserState );
-
 
     const logout = ( e )=>{
         e.preventDefault();
         setUserState({"isLoggedIn":false});
-
     }
+
 
     return<>
 
