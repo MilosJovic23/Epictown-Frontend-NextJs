@@ -3,7 +3,7 @@
     background-color: #F9F8F6;
     padding: 4em 0;
 }
-.gridContainer{
+.display-grid{
     display: grid;
     grid-auto-columns: 1fr;
     padding-block: 2rem;
