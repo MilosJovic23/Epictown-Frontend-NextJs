@@ -4,13 +4,15 @@
 
 import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
-import {useRecoilState} from "recoil";
-import {BlogState} from "@/app/_libs/States/BlogState";
+import {useFetch} from "@/app/_hooks/useFetch";
 
 
 export default function  Blog(){
 
-    const [blogPosts, setBlogPosts] = useRecoilState(BlogState);
+    const {data:blogPosts,loading,error} = useFetch(process.env.NEXT_PUBLIC_BLOGPOSTS_URL);
+
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
     return<>
 
