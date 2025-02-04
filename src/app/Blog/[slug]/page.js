@@ -1,52 +1,40 @@
 
 "use client"
 
-import {useRecoilState, } from "recoil";
-
-
-import {useEffect, useState} from "react";
 import Navbar from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 import "bootstrap/dist/css/bootstrap.css"
 import "../../singleProduct.css"
 import "../../globals.css"
-import {BlogState} from "@/app/_libs/States/BlogState";
+import {useFetch} from "@/app/_hooks/useFetch";
+
 
 
 export default function Blog ({params}){
 
+    const {data:blogPosts,loading,error} = useFetch(process.env.NEXT_PUBLIC_BLOGPOSTS_URL);
 
-    const [blogPosts, setBlogPosts] = useRecoilState(BlogState);
-    const [isMounted,setIsMounted] = useState(false)
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if(!isMounted){
-        return <h5>loading..</h5>
-    }
 
     const { slug } = params;
-    const blogExist = blogPosts.some(item => item.id === parseInt(slug));
-
-    if(!blogExist) {
-        return <div>
-            <Navbar/>
-            <h1>page doesnt exist</h1>
-        </div>
-    }
-
-
-
+    // const blogExist = blogPosts.some(item => item.id === parseInt(slug));
+    //
+    // if(!blogExist) {
+    //     return <div>
+    //         <Navbar/>
+    //         <h1>page doesnt exist</h1>
+    //     </div>
+    // }
     return <>
 
         <Navbar/>
-
         {blogPosts.map((blog,index)=>{
 
-            return (blog.id===parseInt(slug))?
+            console.log(blog.content);
+            return ( (blog.id === slug) &&
+
                 (
 
                     <div className="BlogContainer productContainer" key={index}>
@@ -63,8 +51,11 @@ export default function Blog ({params}){
                     </div>
 
                 )
-                :
-                ""
+
+
+            )
+
+
 
         })}
 
