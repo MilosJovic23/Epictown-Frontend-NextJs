@@ -3,9 +3,15 @@
 
 import "bootstrap/dist/css/bootstrap.css"
 import "../Blog.css"
+import {useFetch} from "@/app/_hooks/useFetch";
 
 const Blog = ()=>{
 
+
+    const {data:blogPosts,error,loading} = useFetch(process.env.NEXT_PUBLIC_BLOGPOSTS_URL);
+
+    if ( loading ) return <p>Loading...</p>
+    if ( error ) return <p>Error: {error}</p>;
 
     return <>
 
