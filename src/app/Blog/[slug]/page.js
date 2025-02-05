@@ -32,7 +32,6 @@ export default function Blog ({params}){
         <Navbar/>
         {blogPosts.map((blog,index)=>{
 
-            console.log(blog.content);
             return ( (blog.id === slug) &&
 
                 (
