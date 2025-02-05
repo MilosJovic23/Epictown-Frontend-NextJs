@@ -24,7 +24,7 @@ export default function  Blog(){
                     <ul className="list-group ">
                         {blogPosts.map((post, postIndex) => (
                             <li className="list-group-item  py-4" key={postIndex}>
-                                <a href={post.link} className="fw-bold fs-5">{post.title}</a>
+                                <a href={`/Blog/${post.id}`} className="fw-bold fs-5">{post.title}</a>
                                 <span className="text-muted"> - Date: {post.date}</span>
                                 <p>{post.description}</p>
                             </li>
