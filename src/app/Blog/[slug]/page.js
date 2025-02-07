@@ -17,16 +17,8 @@ export default function Blog ({params}){
     if ( loading ) return <p>Loading...</p>
     if ( error ) return <p>Error: {error}</p>;
 
-
     const { slug } = params;
-    // const blogExist = blogPosts.some(item => item.id === parseInt(slug));
-    //
-    // if(!blogExist) {
-    //     return <div>
-    //         <Navbar/>
-    //         <h1>page doesnt exist</h1>
-    //     </div>
-    // }
+
     return <>
 
         <Navbar/>
