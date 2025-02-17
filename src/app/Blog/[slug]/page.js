@@ -21,6 +21,7 @@ export default function Blog ({params}){
                 const jsonData = JSON.parse(data);  // Attempt to parse the JSON
                 console.log("Parsed JSON:", jsonData);
             } catch (error) {
+
                 console.error("Error parsing JSON:", error);
             }
         })
