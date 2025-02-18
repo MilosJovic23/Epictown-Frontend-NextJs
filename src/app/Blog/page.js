@@ -5,7 +5,6 @@ import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import {useFetch} from "@/app/_hooks/useFetch";
 
-
 export default function  Blog(){
 
     const {data:blogPosts,loading,error} = useFetch(process.env.NEXT_PUBLIC_BLOGPOSTS_URL);
