@@ -1,5 +1,4 @@
 
-
 'use client'
 
 import Footer from "@/app/_components/Footer";
