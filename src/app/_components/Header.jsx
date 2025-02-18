@@ -18,7 +18,6 @@ const Header =()=>{
         setUserState({"isLoggedIn":false});
     }
 
-
     return<>
 
     <div className="navBar">
