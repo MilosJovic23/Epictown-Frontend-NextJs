@@ -8,8 +8,6 @@ import "../../singleProduct.css"
 import "../../globals.css"
 import {useFetch} from "@/app/_hooks/useFetch";
 
-
-
 export default function Blog ({params}){
 
     const {data:blogPosts,loading,error} = useFetch(process.env.NEXT_PUBLIC_BLOGPOSTS_URL);
