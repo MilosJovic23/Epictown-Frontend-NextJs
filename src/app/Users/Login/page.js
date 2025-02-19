@@ -32,6 +32,7 @@ export default function Login (){
     const onSubmit1 = async (data) => {
 
         try{
+            console.log(process.env.NEXT_PUBLIC_LOGIN_UR)
             const response = await fetch(process.env.NEXT_PUBLIC_LOGIN_URL, {
                 method: "POST",
                 headers: {
@@ -42,7 +43,7 @@ export default function Login (){
                     "password": data.password,
                 })
             });
-
+            console.log(response);
             if (response.ok) {
                 const result = await response.json();
                 data.email === "admin@admin.com" ?
