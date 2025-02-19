@@ -5,7 +5,7 @@ import Header from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
 
 import {useRouter} from "next/navigation";
-import "../../login.css"
+import "@/app/login.css"
 import {useForm} from "react-hook-form";
 import {useRecoilState} from "recoil";
 import {UserState} from "@/app/_libs/States/UserState";
