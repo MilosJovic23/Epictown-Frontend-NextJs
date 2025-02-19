@@ -34,6 +34,7 @@ export default function Login (){
         try{
             const response = await fetch(process.env.NEXT_PUBLIC_LOGIN_URL, {
                 method: "POST",
+                mode: 'cors',
                 headers: {
                     "Content-Type": "application/json",
                 },
