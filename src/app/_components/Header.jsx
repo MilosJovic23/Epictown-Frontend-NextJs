@@ -51,7 +51,7 @@ const Header =()=>{
                 userState.isLoggedIn ?
                 <a className="align-self-center" href="#" onClick={e => logout(e)}>Logout</a>
                 :
-                <a className="align-self-center" href={`/pages/api/users/page.js`}>Login/Register</a>
+                <a className="align-self-center" href={`/Users/Login`}>Login/Register</a>
                 }
 
             </div>
