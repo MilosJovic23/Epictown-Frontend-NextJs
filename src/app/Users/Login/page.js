@@ -37,6 +37,7 @@ export default function Login (){
                 mode: 'cors',
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
                 body: JSON.stringify({
                     "username": data.email,
