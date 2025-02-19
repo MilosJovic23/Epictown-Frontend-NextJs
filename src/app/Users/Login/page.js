@@ -32,8 +32,7 @@ export default function Login (){
     const onSubmit1 = async (data) => {
 
         try{
-            console.log(process.env.NEXT_PUBLIC_LOGIN_UR)
-            const response = await fetch(process.env.NEXT_PUBLIC_LOGIN_URL, {
+            const response = await fetch("https://194-37-81-250.cloud-xip.com/restapi/login/api.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -43,7 +42,7 @@ export default function Login (){
                     "password": data.password,
                 })
             });
-            console.log(response);
+
             if (response.ok) {
                 const result = await response.json();
                 data.email === "admin@admin.com" ?
