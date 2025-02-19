@@ -32,7 +32,7 @@ export default function Login (){
     const onSubmit1 = async (data) => {
 
         try{
-            const response = await fetch("https://194-37-81-250.cloud-xip.com/restapi/login/api.php", {
+            const response = await fetch(process.env.NEXT_PUBLIC_LOGIN_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
