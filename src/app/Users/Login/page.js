@@ -32,7 +32,7 @@ export default function Login (){
     const onSubmit1 = async (data) => {
 
         try{
-            const response = await fetch(process.env.NEXT_PUBLIC_LOGIN_URL, {
+            const response = await fetch('/api/users/login', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -42,7 +42,6 @@ export default function Login (){
                     "password": data.password,
                 })
             });
-
             if (response.ok) {
                 const result = await response.json();
                 data.email === "admin@admin.com" ?
@@ -64,7 +63,7 @@ export default function Login (){
     const onSubmit2 = async (data) => {
 
         try{
-            const response = await fetch(process.env.NEXT_PUBLIC_REGISTER_URL, {
+            const response = await fetch(process.env.REGISTER_URL, {
 
                 method: "POST",
                 headers: {
