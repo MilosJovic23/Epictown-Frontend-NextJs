@@ -63,7 +63,7 @@ export default function Login (){
     const onSubmit2 = async (data) => {
 
         try{
-            const response = await fetch(process.env.REGISTER_URL, {
+            const response = await fetch('/api/users/register', {
 
                 method: "POST",
                 headers: {
