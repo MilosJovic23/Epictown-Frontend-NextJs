@@ -7,7 +7,7 @@ import {useFetch} from "@/app/_hooks/useFetch";
 
 export default function  Blog(){
 
-    const {data:blogPosts,loading,error} = useFetch(process.env.BLOGPOSTS_URL);
+    const {data:blogPosts,loading,error} = useFetch(process.env.NEXT_PUBLIC_BLOGPOSTS_URL);
 
     if ( loading ) return <p>Loading...</p>
     if ( error ) return <p>Error: {error}</p>;
