@@ -9,7 +9,7 @@ import {useFetch} from "@/app/_hooks/useFetch";
 
 const Hero = () =>{
 
-    const { data:comics,error,loading} = useFetch(process.env.NEXT_PUBLIC_API_URL);
+    const { data:comics,error,loading} = useFetch(process.env.API_ALLPRODUCTS_URL);
 
     if ( loading ) return <p>Loading...</p>
     if ( error ) return <p>Error: {error}</p>;
