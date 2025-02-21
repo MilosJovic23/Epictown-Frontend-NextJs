@@ -11,7 +11,7 @@ import {useFetch} from "@/app/_hooks/useFetch";
 
 export default function Dashboard () {
 
-    const { data:comics,error,loading,refetch} = useFetch(process.env.API_ALLPRODUCTS_URL);
+    const { data:comics,error,loading,refetch} = useFetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL);
     const [ EditComicId,setEditComicId ] = useState(null);
     const [ loadingAddNew ,setLoadingAddNew ] = useState(false);
     const [ message ,setMessage ] = useState(null);
@@ -41,7 +41,7 @@ export default function Dashboard () {
 
         e.preventDefault();
         try{
-            const response = await fetch(process.env.API_ALLPRODUCTS_URL, {
+            const response = await fetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL, {
                 method: "POST",
                 headers:{
                     'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export default function Dashboard () {
     const deleteItem = async (comicbookId) =>{
 
         try{
-            const response = await fetch(process.env.API_ALLPRODUCTS_URL, {
+            const response = await fetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -125,14 +125,14 @@ export default function Dashboard () {
 
     }
     const EditComic = (comicbook)=>{
-        setEditComicId(comicbook.id);
+        setEditComicId(comicbook.id);F
         setEditFormData(comicbook);
     }
     const handleEditSubmit = async (e,comicbook) => {
 
         e.preventDefault();
         try{
-            const response = await fetch(process.env.API_ALLPRODUCTS_URL, {
+            const response = await fetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
