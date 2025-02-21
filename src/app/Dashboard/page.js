@@ -108,7 +108,7 @@ export default function Dashboard () {
 
         try{
             const response = await fetch("/api/products/delete", {
-                method: "DELETE",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -133,7 +133,7 @@ export default function Dashboard () {
         e.preventDefault();
         try{
             const response = await fetch("/api/products/update", {
-                method: "PATCH",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },

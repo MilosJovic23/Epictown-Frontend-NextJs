@@ -6,7 +6,7 @@ export default async function handler(req,res){
     }
     try{
         const response = await fetch(process.env.REGISTER_URL, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
             },
