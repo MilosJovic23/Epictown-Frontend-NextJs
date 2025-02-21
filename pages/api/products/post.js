@@ -5,7 +5,7 @@ export default async function handler(req,res){
         return res.status(405).json({ message: 'Method not allowed' });
     }
     try{
-        const response = await fetch(process.env.REGISTER_URL, {
+        const response = await fetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
