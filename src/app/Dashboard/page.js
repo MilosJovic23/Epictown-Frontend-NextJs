@@ -125,7 +125,7 @@ export default function Dashboard () {
 
     }
     const EditComic = (comicbook)=>{
-        setEditComicId(comicbook.id);F
+        setEditComicId(comicbook.id);
         setEditFormData(comicbook);
     }
     const handleEditSubmit = async (e,comicbook) => {
