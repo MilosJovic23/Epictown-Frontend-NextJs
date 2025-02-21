@@ -41,7 +41,7 @@ export default function Dashboard () {
 
         e.preventDefault();
         try{
-            const response = await fetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL, {
+            const response = await fetch("/api/products/post", {
                 method: "POST",
                 headers:{
                     'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export default function Dashboard () {
     const deleteItem = async (comicbookId) =>{
 
         try{
-            const response = await fetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL, {
+            const response = await fetch("/api/products/delete", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -132,7 +132,7 @@ export default function Dashboard () {
 
         e.preventDefault();
         try{
-            const response = await fetch(process.env.NEXT_PUBLIC_ALLPRODUCTS_URL, {
+            const response = await fetch("/api/products/update", {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
