@@ -96,7 +96,8 @@ export default function Login (){
 
             <div className="w-50 h-50">
                 <form onSubmit={handleSubmit1(onSubmit1)} className="form">
-
+                    <p>For CRUD dashboard page use </p>
+                    <b> admin@admin.com && admin12345 </b>
                     <div className="formGroup">
                         <input
                             type="email"
